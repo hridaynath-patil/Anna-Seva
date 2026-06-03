@@ -64,7 +64,7 @@ export default function AboutPage() {
           position: 'relative',
           width: '160px',
           height: '160px',
-          borderRadius: '50%',
+          borderRadius: '12px',
           overflow: 'hidden',
           border: '4px solid white',
           boxShadow: '0 8px 20px rgba(0, 0, 0, 0.08)',
@@ -80,11 +80,9 @@ export default function AboutPage() {
             alt="Shri Vishwanathrao Shamrao Patil Charitable Trust Logo" 
             placeholder="blur"
             style={{ 
-              objectFit: 'cover', 
-              objectPosition: 'center 20%',
+              objectFit: 'contain', 
               width: '100%', 
-              height: '100%',
-              transform: 'scale(1.35)'
+              height: '100%'
             }} 
           />
         </div>
