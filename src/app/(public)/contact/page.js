@@ -58,7 +58,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="public-container animate-fade-in" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'start' }}>
+    <div className="public-container animate-fade-in responsive-grid-contact">
 
       {/* Contact Info Panel */}
       <div style={{ background: 'white', padding: '2.5rem', borderRadius: '16px', border: '1px solid var(--border-color)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>

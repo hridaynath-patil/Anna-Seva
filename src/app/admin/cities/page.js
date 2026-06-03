@@ -92,7 +92,7 @@ export default function AdminCitiesPage() {
         <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '2rem' }}>Manage Cities</h2>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '2.5rem', alignItems: 'start' }}>
+      <div className="responsive-grid-2-1" style={{ gap: '2.5rem', alignItems: 'start' }}>
         {/* Cities Table */}
         <div className="table-container">
           {loading ? (

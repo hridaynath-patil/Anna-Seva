@@ -23,27 +23,21 @@ export default function HomePage() {
       <section className="public-banner" style={{ height: '480px' }}>
         <div className="public-banner-content" style={{ maxWidth: '950px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', marginBottom: '1.75rem' }}>
-            <span style={{
-              display: 'inline-block',
+            <span className="hero-trust-badge" style={{
               backgroundColor: 'rgba(13, 148, 136, 0.08)',
               color: 'var(--accent-teal-dark)',
-              padding: '0.5rem 1.75rem',
               borderRadius: '50px',
               border: '1.5px solid rgba(13, 148, 136, 0.2)',
-              fontSize: '1.25rem',
               fontWeight: '800',
               lineHeight: '1.4'
             }}>
               श्री. विश्वनाथराव शामराव पाटील चॅरिटेबल ट्रस्ट उपक्रम
             </span>
-            <span style={{
-              display: 'inline-block',
+            <span className="hero-trust-badge-en" style={{
               backgroundColor: 'rgba(13, 148, 136, 0.08)',
               color: 'var(--accent-teal-dark)',
-              padding: '0.4rem 1.5rem',
               borderRadius: '50px',
               border: '1.5px solid rgba(13, 148, 136, 0.15)',
-              fontSize: '0.92rem',
               fontWeight: '700',
               letterSpacing: '2px',
               lineHeight: '1.4'
@@ -55,7 +49,7 @@ export default function HomePage() {
           <p>
             We bridge the gap between food abundance and hunger. Through local action and trusted coordination, we redirect surplus meals to families and shelters who need them most.
           </p>
-          <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+          <div className="hero-cta-row" style={{ marginTop: '2rem' }}>
             <Link href="/available-food" className="form-submit-btn" style={{ width: 'auto', padding: '0.75rem 1.85rem', borderRadius: '50px', textDecoration: 'none', display: 'inline-block', margin: 0, fontSize: '0.92rem' }}>
               Request Food Assistance
             </Link>
@@ -106,7 +100,7 @@ export default function HomePage() {
             <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
               <span style={{ color: 'var(--accent-teal)', fontSize: '1.5rem', lineHeight: '1.2', flexShrink: 0 }}>✓</span>
               <div>
-                <strong style={{ color: 'var(--primary-navy)', fontSize: '1.15rem', display: 'block', marginBottom: '0.25rem' }}>Direct & Transparent Impact</strong>
+                <strong style={{ color: 'var(--primary-navy)', fontSize: '1.15rem', display: 'block', marginBottom: '0.25rem' }}>Direct &amp; Transparent Impact</strong>
                 <span style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.6' }}>
                   Enabling real-time request tracking and direct coordination between verified donors and organizations for total accountability.
                 </span>
@@ -123,7 +117,7 @@ export default function HomePage() {
           <h2 style={{ fontSize: '2.5rem', marginTop: '0.5rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>Our Impact Dashboard</h2>
         </div>
 
-        <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+        <div className="stats-grid">
           <div className="stat-card blue" style={{ minHeight: '180px', justifyContent: 'center', alignItems: 'center', textAlign: 'center', background: 'white', color: 'var(--text-main)', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-md)' }}>
             <span className="stat-card-title" style={{ color: 'var(--text-muted)' }}>Active Donors</span>
             <span className="stat-card-value" style={{ color: 'var(--primary-navy)' }}>{donorCount}</span>
@@ -155,7 +149,7 @@ export default function HomePage() {
             <h2 style={{ fontSize: '2.5rem', marginTop: '0.5rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>Operating Pillars</h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
 
             {/* Donor */}
             <div style={{ background: 'white', padding: '3rem', borderRadius: '16px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)', transition: 'all 0.3s', display: 'flex', flexDirection: 'column' }}>
@@ -176,7 +170,7 @@ export default function HomePage() {
               <div style={{ width: '60px', height: '60px', borderRadius: '14px', backgroundColor: 'rgba(217, 119, 6, 0.1)', color: 'var(--accent-gold)', fontSize: '1.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem', fontWeight: 800 }}>
                 02
               </div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 700 }}>Request & Collect</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 700 }}>Request &amp; Collect</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.98rem', lineHeight: '1.7', flex: 1 }}>
                 NGOs, shelter homes, and volunteers filter listed food by state and city. They submit claims specifying the quantity, purpose, and delivery address.
               </p>
@@ -190,7 +184,7 @@ export default function HomePage() {
               <div style={{ width: '60px', height: '60px', borderRadius: '14px', backgroundColor: 'rgba(15, 23, 42, 0.1)', color: 'var(--primary-navy)', fontSize: '1.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem', fontWeight: 800 }}>
                 03
               </div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 700 }}>Audit & Monitor</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 700 }}>Audit &amp; Monitor</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.98rem', lineHeight: '1.7', flex: 1 }}>
                 System administrators manage regional coverage (states/cities), monitor donor enrollments, approve claims where needed, and compile performance audit reports.
               </p>

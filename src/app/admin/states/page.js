@@ -80,7 +80,7 @@ export default function AdminStatesPage() {
         <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '2rem' }}>Manage States</h2>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '2.5rem', alignItems: 'start' }}>
+      <div className="responsive-grid-2-1" style={{ gap: '2.5rem', alignItems: 'start' }}>
         {/* States List Table */}
         <div className="table-container">
           {loading ? (

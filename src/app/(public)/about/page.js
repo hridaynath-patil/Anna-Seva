@@ -15,10 +15,10 @@ export default function AboutPage() {
 
   return (
     <div className="public-container animate-fade-in" style={{ maxWidth: '950px' }}>
-      <h1 style={{ fontSize: '3rem', borderBottom: '3px solid var(--primary-teal)', paddingBottom: '1rem', marginBottom: '2rem', fontFamily: 'var(--font-title)' }}>
+      <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', borderBottom: '3px solid var(--primary-teal)', paddingBottom: '1rem', marginBottom: '2rem', fontFamily: 'var(--font-title)' }}>
         About Anna Seva
       </h1>
-      
+
       <div style={{ background: 'white', padding: '2.5rem', borderRadius: '16px', border: '1px solid var(--border-color)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', lineHeight: '1.8' }}>
         <h2 style={{ color: 'var(--primary-teal-dark)', marginBottom: '1.25rem', fontSize: '1.6rem' }}>Our Mission</h2>
         <p style={{ fontSize: '1.1rem', color: '#334155', whiteSpace: 'pre-line', marginBottom: '2rem' }}>
@@ -47,12 +47,12 @@ export default function AboutPage() {
       </div>
 
       {/* Managing Trustee Section */}
-      <div style={{ 
+      <div style={{
         marginTop: '2.5rem',
-        background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)', 
-        padding: '2.5rem', 
-        borderRadius: '16px', 
-        border: '1px solid var(--border-color)', 
+        background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+        padding: '2.5rem',
+        borderRadius: '16px',
+        border: '1px solid var(--border-color)',
         boxShadow: '0 10px 30px rgba(15, 23, 42, 0.04)',
         display: 'flex',
         flexDirection: 'row',
@@ -75,38 +75,38 @@ export default function AboutPage() {
           flexShrink: 0,
           margin: '0 auto'
         }}>
-          <Image 
-            src={trustLogoImg} 
-            alt="Shri Vishwanathrao Shamrao Patil Charitable Trust Logo" 
+          <Image
+            src={trustLogoImg}
+            alt="Shri Vishwanathrao Shamrao Patil Charitable Trust Logo"
             placeholder="blur"
-            style={{ 
-              objectFit: 'contain', 
-              width: '100%', 
+            style={{
+              objectFit: 'contain',
+              width: '100%',
               height: '100%'
-            }} 
+            }}
           />
         </div>
-        
+
         <div style={{ flex: '1', minWidth: '280px' }}>
-          <h2 style={{ 
-            color: 'var(--primary-teal-dark)', 
-            marginBottom: '0.25rem', 
+          <h2 style={{
+            color: 'var(--primary-teal-dark)',
+            marginBottom: '0.25rem',
             fontSize: '1.8rem',
             fontWeight: '800',
             fontFamily: 'var(--font-title)'
           }}>
-            Hridaynath Bhagwat Patil
+            Shri. Hridaynath Bhagwat Patil
           </h2>
-          <p style={{ 
-            color: 'var(--primary-teal)', 
-            fontWeight: '600', 
+          <p style={{
+            color: 'var(--primary-teal)',
+            fontWeight: '600',
             fontSize: '1rem',
             marginBottom: '1.25rem',
             letterSpacing: '0.05em'
           }}>
             MANAGING TRUSTEE
           </p>
-          
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <span style={{ fontSize: '1.3rem', lineHeight: '1', width: '1.3rem', display: 'flex', justifyContent: 'center' }}>🏛️</span>

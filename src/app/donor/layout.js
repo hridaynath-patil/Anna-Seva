@@ -2,6 +2,7 @@ import { getSession } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import DonorLayoutClient from './DonorLayoutClient';
+import DonorSidebarToggle from './DonorSidebarToggle';
 
 export const revalidate = 0; // Disable layout caching
 
@@ -74,8 +75,11 @@ export default async function DonorLayout({ children }) {
       {/* Main Panel */}
       <div className="dashboard-main">
         <header className="dashboard-header">
-          <div className="dashboard-title-area">
-            <h3 style={{ fontFamily: 'var(--font-title)', fontWeight: 600 }}>DONOR PORTAL - ANNA SEVA</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <DonorSidebarToggle />
+            <div className="dashboard-title-area">
+              <h3 style={{ fontFamily: 'var(--font-title)', fontWeight: 600 }}>DONOR PORTAL - ANNA SEVA</h3>
+            </div>
           </div>
           <div className="dashboard-user-dropdown">
             <span className="avatar-icon">D</span>

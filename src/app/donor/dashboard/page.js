@@ -70,7 +70,7 @@ export default async function DonorDashboardPage() {
       
       {/* Counters Grid */}
       <h3 style={{ marginBottom: '1rem', color: '#107c64' }}>Food Listings Summary</h3>
-      <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+      <div className="stats-grid">
         <Link href="/donor/my-listings" style={{ textDecoration: 'none' }}>
           <div className="stat-card blue" style={{ backgroundColor: '#107c64' }}>
             <span className="stat-card-title">Total Listed Food</span>
@@ -98,7 +98,7 @@ export default async function DonorDashboardPage() {
       </div>
 
       <h3 style={{ margin: '3rem 0 1rem', color: '#107c64' }}>Claims & Requests for My Food</h3>
-      <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+      <div className="stats-grid">
         <Link href="/donor/my-requests" style={{ textDecoration: 'none' }}>
           <div className="stat-card dark-gray">
             <span className="stat-card-title">All Claims</span>

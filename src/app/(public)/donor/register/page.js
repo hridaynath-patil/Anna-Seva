@@ -171,7 +171,7 @@ export default function DonorRegisterPage() {
         )}
 
         <form onSubmit={handleSubmit}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2col">
             <div className="form-group">
               <label htmlFor="name">Full Name</label>
               <input
@@ -200,7 +200,7 @@ export default function DonorRegisterPage() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2col">
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <div style={{ position: 'relative' }}>
@@ -254,7 +254,7 @@ export default function DonorRegisterPage() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2col">
             <div className="form-group">
               <label htmlFor="state_id">State</label>
               <select

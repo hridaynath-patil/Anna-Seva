@@ -148,7 +148,7 @@ export default function DonorProfilePage() {
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2col">
             <div className="form-group">
               <label htmlFor="state_id" style={{ color: 'white' }}>State</label>
               <select

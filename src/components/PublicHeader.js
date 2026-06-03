@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 export default function PublicHeader() {
   const pathname = usePathname();
   const [user, setUser] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     // Check if user is logged in
@@ -18,6 +19,11 @@ export default function PublicHeader() {
         }
       })
       .catch(() => {});
+  }, [pathname]);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
   }, [pathname]);
 
   const navItems = [
@@ -45,7 +51,18 @@ export default function PublicHeader() {
           <span className="public-logo-devanagari">अन्न सेवा</span>
           <span>ANNA SEVA</span>
         </Link>
-        <ul className="public-menu">
+
+        {/* Hamburger Toggle Button */}
+        <button
+          className="mobile-menu-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+        >
+          {menuOpen ? '✕' : '☰'}
+        </button>
+
+        <ul className={`public-menu${menuOpen ? ' mobile-menu-open' : ''}`}>
           {navItems.map((item) => {
             const isActive = pathname === item.path;
             return (

@@ -33,7 +33,7 @@ export default function AdminDashboardPage() {
       <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '2rem', marginBottom: '2rem' }}>Dashboard Overview</h2>
       
       {/* Grid matching the image exactly */}
-      <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+      <div className="stats-grid">
         {/* State */}
         <Link href="/admin/states" style={{ textDecoration: 'none' }}>
           <div className="stat-card brown">
@@ -71,7 +71,7 @@ export default function AdminDashboardPage() {
         </Link>
       </div>
 
-      <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', marginTop: '2rem' }}>
+      <div className="stats-grid" style={{ marginTop: '2rem' }}>
         {/* All Requests */}
         <Link href="/admin/requests" style={{ textDecoration: 'none' }}>
           <div className="stat-card dark-gray">

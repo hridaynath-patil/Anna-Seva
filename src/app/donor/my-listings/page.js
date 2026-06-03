@@ -198,7 +198,7 @@ export default function DonorMyListingsPage() {
             )}
 
             <form onSubmit={handleEditSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="responsive-grid-2col">
                 <div className="form-group">
                   <label htmlFor="edit_contact">Contact Person</label>
                   <input
@@ -247,7 +247,7 @@ export default function DonorMyListingsPage() {
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="responsive-grid-2col">
                 <div className="form-group">
                   <label htmlFor="edit_state">State</label>
                   <select

@@ -128,7 +128,7 @@ export default function DonorListFoodPage() {
         <div style={{ padding: '2rem', textAlign: 'center' }}>Loading form details...</div>
       ) : (
         <form onSubmit={handleSubmit} style={{ backgroundColor: 'rgba(30, 36, 40, 0.5)', padding: '2.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2col">
             <div className="form-group">
               <label htmlFor="contact_person" style={{ color: 'white' }}>Contact Person Name</label>
               <input
@@ -184,7 +184,7 @@ export default function DonorListFoodPage() {
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2col">
             <div className="form-group">
               <label htmlFor="state_id" style={{ color: 'white' }}>State</label>
               <select

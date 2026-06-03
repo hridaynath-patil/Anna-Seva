@@ -88,7 +88,7 @@ export default function AdminReportsPage() {
           
           {/* Stats Summary Cards */}
           <h3 style={{ marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem', color: '#1cb896' }}>Report Metrics</h3>
-          <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', marginBottom: '3rem' }}>
+          <div className="stats-grid" style={{ marginBottom: '3rem' }}>
             <div className="stat-card blue" style={{ padding: '1.25rem' }}>
               <span className="stat-card-title" style={{ fontSize: '0.8rem' }}>Total Listed Food</span>
               <span className="stat-card-value" style={{ fontSize: '2rem' }}>{reportData.stats.total_listings}</span>

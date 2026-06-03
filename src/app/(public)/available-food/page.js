@@ -343,7 +343,7 @@ export default function AvailableFoodPage() {
             </h2>
 
             {/* Food Info Summary */}
-            <div style={{ backgroundColor: '#f8fafc', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.95rem', border: '1px solid var(--border-light)' }}>
+            <div className="modal-food-summary" style={{ backgroundColor: '#f8fafc', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.95rem', border: '1px solid var(--border-light)' }}>
               <div><strong>Food Items:</strong> <span style={{ color: 'var(--accent-teal-dark)', fontWeight: 700 }}>{selectedListing.food_items}</span></div>
               <div><strong>Contact Donor:</strong> {selectedListing.contact_person}</div>
               <div><strong>Phone Number:</strong> {selectedListing.mobile}</div>
@@ -373,7 +373,7 @@ export default function AvailableFoodPage() {
             )}
 
             <form onSubmit={handleRequestSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+              <div className="responsive-grid-2col">
                 <div className="form-group">
                   <label htmlFor="req_name">NGO / Recipient Organization Name</label>
                   <input
@@ -401,7 +401,7 @@ export default function AvailableFoodPage() {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+              <div className="responsive-grid-2col">
                 <div className="form-group">
                   <label htmlFor="req_state">State</label>
                   <select
@@ -448,7 +448,7 @@ export default function AvailableFoodPage() {
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.25rem' }}>
+              <div className="responsive-grid-2-1">
                 <div className="form-group">
                   <label htmlFor="req_reason">Claim Justification / Reason</label>
                   <input
