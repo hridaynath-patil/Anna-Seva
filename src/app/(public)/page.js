@@ -1,7 +1,5 @@
 import { query } from '@/lib/db';
 import Link from 'next/link';
-import Image from 'next/image';
-import trustLogoImg from './about/trust_logo.jpg';
 
 export const revalidate = 0; // Live statistics on render
 
@@ -22,24 +20,8 @@ export default function HomePage() {
     <div className="animate-fade-in" style={{ backgroundColor: '#ffffff' }}>
 
       {/* Immersive Hero Section */}
-      <section className="public-banner" style={{ minHeight: '560px', padding: '3rem 1rem' }}>
+      <section className="public-banner" style={{ height: '480px' }}>
         <div className="public-banner-content" style={{ maxWidth: '950px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1.25rem' }}>
-            <Image 
-              src={trustLogoImg} 
-              alt="Shri Vishwanathrao Shamrao Patil Charitable Trust Logo" 
-              width={100}
-              height={100}
-              style={{ 
-                objectFit: 'contain', 
-                backgroundColor: '#ffffff', 
-                borderRadius: '10px', 
-                padding: '4px', 
-                boxShadow: '0 4px 15px rgba(0,0,0,0.06)',
-                border: '1px solid rgba(13, 148, 136, 0.15)'
-              }}
-            />
-          </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', marginBottom: '1.75rem' }}>
             <span style={{
               display: 'inline-block',

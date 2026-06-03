@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
-import trustLogoImg from '../../about/trust_logo.jpg';
 
 export default function DonorLoginPage() {
   const router = useRouter();
@@ -41,24 +39,8 @@ export default function DonorLoginPage() {
   };
 
   return (
-    <div className="public-container animate-fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1rem' }}>
-        <Image 
-          src={trustLogoImg} 
-          alt="Shri Vishwanathrao Shamrao Patil Charitable Trust Logo" 
-          width={130}
-          height={130}
-          style={{ 
-            objectFit: 'contain', 
-            backgroundColor: '#ffffff', 
-            borderRadius: '12px', 
-            padding: '6px', 
-            boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-            border: '1px solid var(--border-color)'
-          }}
-        />
-      </div>
-      <div className="form-card" style={{ marginTop: '0' }}>
+    <div className="public-container animate-fade-in">
+      <div className="form-card">
         <h1 className="form-title">Donor Login</h1>
         
         {error && (

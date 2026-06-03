@@ -103,7 +103,42 @@ export default async function AdminLayout({ children }) {
           </div>
         </header>
 
-        <main className="dashboard-content">{children}</main>
+        <main className="dashboard-content">
+          {children}
+          
+          <footer style={{ 
+            marginTop: '4rem', 
+            paddingTop: '2rem', 
+            borderTop: '1px solid rgba(255, 255, 255, 0.05)', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '1rem'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <img 
+                src="/trust_logo.jpg" 
+                alt="Shri Vishwanathrao Shamrao Patil Charitable Trust Logo" 
+                style={{ 
+                  width: '36px', 
+                  height: '36px', 
+                  borderRadius: '4px', 
+                  objectFit: 'contain',
+                  backgroundColor: '#ffffff',
+                  padding: '2px',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.2)'
+                }} 
+              />
+              <span style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: '500' }}>
+                Shri Vishwanathrao Shamrao Patil Charitable Trust, Latur
+              </span>
+            </div>
+            <span style={{ fontSize: '0.85rem', color: '#64748b' }}>
+              © 2026 Anna Seva. All rights reserved.
+            </span>
+          </footer>
+        </main>
       </div>
     </div>
   );
