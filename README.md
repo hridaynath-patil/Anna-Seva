@@ -4,7 +4,18 @@ An elegantly designed, full-stack food rescue and redistribution web application
 
 🔗 **Live Local Link:** [http://localhost:3000](http://localhost:3000)
 
+### 📸 Application Screenshots
+| **Landing Page** | **Available Food Directory** |
+|:---:|:---:|
+| ![Landing Page](./screenshots/landing.png) | ![Available Food](./screenshots/available_food.png) |
 
+| **Donor Portal Login** | **Admin Dashboard** |
+|:---:|:---:|
+| ![Donor Login](./screenshots/donor_login.png) | ![Admin Dashboard](./screenshots/admin_dashboard.png) |
+
+| **Donor Food Listings** |
+|:---:|
+| ![Donor Listings](./screenshots/donor_listings.png) |
 ---
 
 ## Page-by-Page Feature Breakdown
