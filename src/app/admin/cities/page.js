@@ -134,23 +134,23 @@ export default function AdminCitiesPage() {
         </div>
 
         {/* Add City Form */}
-        <div style={{ backgroundColor: 'rgba(30, 36, 40, 0.5)', padding: '2rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
-          <h3 style={{ marginBottom: '1.5rem', color: '#1cb896' }}>Add New City</h3>
+        <div style={{ backgroundColor: '#ffffff', padding: '2rem', borderRadius: '12px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)' }}>
+          <h3 style={{ marginBottom: '1.5rem', color: 'var(--accent-teal-dark)' }}>Add New City</h3>
 
           {error && (
-            <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(245, 61, 86, 0.1)', color: '#ff667a', border: '1px solid rgba(245, 61, 86, 0.2)', marginBottom: '1rem', fontSize: '0.9rem' }}>
+            <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#fef2f2', color: '#991b1b', border: '1px solid #fee2e2', marginBottom: '1rem', fontSize: '0.9rem' }}>
               {error}
             </div>
           )}
           {success && (
-            <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(82, 201, 108, 0.1)', color: '#7aff96', border: '1px solid rgba(82, 201, 108, 0.2)', marginBottom: '1rem', fontSize: '0.9rem' }}>
+            <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#f0fdf4', color: '#166534', border: '1px solid #dcfce7', marginBottom: '1rem', fontSize: '0.9rem' }}>
               {success}
             </div>
           )}
 
           <form onSubmit={handleAddCity}>
             <div className="form-group">
-              <label htmlFor="selectState" style={{ color: 'white' }}>Select State</label>
+              <label htmlFor="selectState">Select State</label>
               <select
                 id="selectState"
                 value={newCity.state_id}
@@ -158,23 +158,23 @@ export default function AdminCitiesPage() {
                 style={{
                   width: '100%',
                   padding: '0.75rem 1rem',
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  border: '1.5px solid rgba(255, 255, 255, 0.1)',
+                  backgroundColor: '#ffffff',
+                  border: '1.5px solid var(--border-light)',
                   borderRadius: '6px',
-                  color: 'white',
+                  color: 'var(--text-main)',
                   outline: 'none'
                 }}
                 required
               >
-                <option value="" style={{ backgroundColor: '#121619' }}>-- Choose State --</option>
+                <option value="">-- Choose State --</option>
                 {states.map((s) => (
-                  <option key={s.id} value={s.id} style={{ backgroundColor: '#121619' }}>{s.name}</option>
+                  <option key={s.id} value={s.id}>{s.name}</option>
                 ))}
               </select>
             </div>
 
             <div className="form-group">
-              <label htmlFor="cityName" style={{ color: 'white' }}>City Name</label>
+              <label htmlFor="cityName">City Name</label>
               <input
                 type="text"
                 id="cityName"
@@ -183,10 +183,10 @@ export default function AdminCitiesPage() {
                 style={{
                   width: '100%',
                   padding: '0.75rem 1rem',
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  border: '1.5px solid rgba(255, 255, 255, 0.1)',
+                  backgroundColor: '#ffffff',
+                  border: '1.5px solid var(--border-light)',
                   borderRadius: '6px',
-                  color: 'white',
+                  color: 'var(--text-main)',
                   outline: 'none'
                 }}
                 required

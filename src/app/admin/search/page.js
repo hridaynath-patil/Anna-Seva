@@ -87,11 +87,11 @@ export default function AdminSearchPage() {
       </div>
 
       {/* Filter panel */}
-      <div style={{ backgroundColor: 'rgba(30, 36, 40, 0.5)', padding: '1.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)', marginBottom: '2.5rem' }}>
+      <div style={{ backgroundColor: '#ffffff', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)', marginBottom: '2.5rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', alignItems: 'flex-end' }}>
           
           <div className="form-group" style={{ margin: 0 }}>
-            <label style={{ color: 'white', fontSize: '0.85rem' }}>Keyword Search</label>
+            <label style={{ fontSize: '0.85rem' }}>Keyword Search</label>
             <input
               type="text"
               name="search"
@@ -99,18 +99,18 @@ export default function AdminSearchPage() {
               value={filters.search}
               onChange={handleChange}
               className="filter-input"
-              style={{ width: '100%', backgroundColor: '#1e2427', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}
+              style={{ width: '100%', backgroundColor: '#ffffff', color: 'var(--text-main)', border: '1px solid var(--border-light)' }}
             />
           </div>
 
           <div className="form-group" style={{ margin: 0 }}>
-            <label style={{ color: 'white', fontSize: '0.85rem' }}>State</label>
+            <label style={{ fontSize: '0.85rem' }}>State</label>
             <select
               name="state_id"
               value={filters.state_id}
               onChange={handleStateChange}
               className="filter-input"
-              style={{ width: '100%', backgroundColor: '#1e2427', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}
+              style={{ width: '100%', backgroundColor: '#ffffff', color: 'var(--text-main)', border: '1px solid var(--border-light)' }}
             >
               <option value="">All States</option>
               {states.map((s) => (
@@ -120,13 +120,13 @@ export default function AdminSearchPage() {
           </div>
 
           <div className="form-group" style={{ margin: 0 }}>
-            <label style={{ color: 'white', fontSize: '0.85rem' }}>City</label>
+            <label style={{ fontSize: '0.85rem' }}>City</label>
             <select
               name="city_id"
               value={filters.city_id}
               onChange={handleChange}
               className="filter-input"
-              style={{ width: '100%', backgroundColor: '#1e2427', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}
+              style={{ width: '100%', backgroundColor: '#ffffff', color: 'var(--text-main)', border: '1px solid var(--border-light)' }}
               disabled={!filters.state_id}
             >
               <option value="">All Cities</option>
@@ -137,13 +137,13 @@ export default function AdminSearchPage() {
           </div>
 
           <div className="form-group" style={{ margin: 0 }}>
-            <label style={{ color: 'white', fontSize: '0.85rem' }}>Status</label>
+            <label style={{ fontSize: '0.85rem' }}>Status</label>
             <select
               name="status"
               value={filters.status}
               onChange={handleChange}
               className="filter-input"
-              style={{ width: '100%', backgroundColor: '#1e2427', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}
+              style={{ width: '100%', backgroundColor: '#ffffff', color: 'var(--text-main)', border: '1px solid var(--border-light)' }}
             >
               <option value="">All Statuses</option>
               <option value="available">Available</option>
@@ -186,7 +186,7 @@ export default function AdminSearchPage() {
               {listings.map((l, index) => (
                 <tr key={l.id}>
                   <td>{index + 1}</td>
-                  <td style={{ fontWeight: 600, color: '#14b8a6' }}>{l.food_items}</td>
+                  <td style={{ fontWeight: 600, color: 'var(--accent-teal-dark)' }}>{l.food_items}</td>
                   <td>{l.contact_person} ({l.mobile})</td>
                   <td>{l.city_name}, {l.state_name}</td>
                   <td>{l.address}</td>

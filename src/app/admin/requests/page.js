@@ -64,7 +64,7 @@ function AdminRequestsContent() {
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             className="filter-input"
-            style={{ backgroundColor: '#1e2427', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}
+            style={{ backgroundColor: '#ffffff', color: 'var(--text-main)', border: '1px solid var(--border-light)' }}
           >
             <option value="all">All Statuses</option>
             <option value="new">New</option>

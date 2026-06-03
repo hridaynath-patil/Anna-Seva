@@ -87,7 +87,7 @@ export default function AboutPage() {
           />
         </div>
 
-        <div style={{ flex: '1', minWidth: '280px' }}>
+        <div className="about-trustee-info" style={{ flex: '1', minWidth: '280px' }}>
           <h2 style={{
             color: 'var(--primary-teal-dark)',
             marginBottom: '0.25rem',
@@ -107,7 +107,7 @@ export default function AboutPage() {
             MANAGING TRUSTEE
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+          <div className="about-trustee-list">
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <span style={{ fontSize: '1.3rem', lineHeight: '1', width: '1.3rem', display: 'flex', justifyContent: 'center' }}>🏛️</span>
               <span style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.5' }}>

@@ -101,12 +101,12 @@ export default function DonorProfilePage() {
       <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '2rem', marginBottom: '1.5rem' }}>My Profile Details</h2>
 
       {error && (
-        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(245, 61, 86, 0.1)', color: '#ff667a', border: '1px solid rgba(245, 61, 86, 0.2)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#fef2f2', color: '#991b1b', border: '1px solid #fee2e2', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
           {error}
         </div>
       )}
       {success && (
-        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(82, 201, 108, 0.1)', color: '#7aff96', border: '1px solid rgba(82, 201, 108, 0.2)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#f0fdf4', color: '#166534', border: '1px solid #dcfce7', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
           {success}
         </div>
       )}
@@ -114,49 +114,49 @@ export default function DonorProfilePage() {
       {loading ? (
         <div style={{ padding: '2rem', textAlign: 'center' }}>Loading profile details...</div>
       ) : (
-        <form onSubmit={handleSubmit} style={{ backgroundColor: 'rgba(30, 36, 40, 0.5)', padding: '2.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+        <form onSubmit={handleSubmit} style={{ backgroundColor: '#ffffff', padding: '2.5rem', borderRadius: '12px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)' }}>
           <div className="form-group">
-            <label style={{ color: 'white' }}>Email Address (Read-only)</label>
+            <label>Email Address (Read-only)</label>
             <input
               type="text"
               value={formData.email}
               disabled
-              style={{ width: '100%', padding: '0.75rem', backgroundColor: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '6px', color: 'rgba(255,255,255,0.4)', cursor: 'not-allowed', outline: 'none' }}
+              style={{ width: '100%', padding: '0.75rem', backgroundColor: '#f1f5f9', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-muted)', cursor: 'not-allowed', outline: 'none' }}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="name" style={{ color: 'white' }}>Full Name</label>
+            <label htmlFor="name">Full Name</label>
             <input
               type="text"
               id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              style={{ width: '100%', padding: '0.75rem', backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none' }}
+              style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none' }}
               required
             />
           </div>
 
           <div className="form-group">
-            <label style={{ color: 'white' }}>Mobile Number (Read-only)</label>
+            <label>Mobile Number (Read-only)</label>
             <input
               type="text"
               value={formData.mobile}
               disabled
-              style={{ width: '100%', padding: '0.75rem', backgroundColor: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '6px', color: 'rgba(255,255,255,0.4)', cursor: 'not-allowed', outline: 'none' }}
+              style={{ width: '100%', padding: '0.75rem', backgroundColor: '#f1f5f9', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-muted)', cursor: 'not-allowed', outline: 'none' }}
             />
           </div>
 
           <div className="responsive-grid-2col">
             <div className="form-group">
-              <label htmlFor="state_id" style={{ color: 'white' }}>State</label>
+              <label htmlFor="state_id">State</label>
               <select
                 id="state_id"
                 name="state_id"
                 value={formData.state_id}
                 onChange={handleStateChange}
-                style={{ width: '100%', padding: '0.75rem', backgroundColor: '#1e2427', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none' }}
+                style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none' }}
                 required
               >
                 <option value="">Select State</option>
@@ -167,13 +167,13 @@ export default function DonorProfilePage() {
             </div>
             
             <div className="form-group">
-              <label htmlFor="city_id" style={{ color: 'white' }}>City</label>
+              <label htmlFor="city_id">City</label>
               <select
                 id="city_id"
                 name="city_id"
                 value={formData.city_id}
                 onChange={handleChange}
-                style={{ width: '100%', padding: '0.75rem', backgroundColor: '#1e2427', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none' }}
+                style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none' }}
                 required
                 disabled={!formData.state_id}
               >
@@ -186,14 +186,14 @@ export default function DonorProfilePage() {
           </div>
 
           <div className="form-group" style={{ marginBottom: '2rem' }}>
-            <label htmlFor="address" style={{ color: 'white' }}>Address</label>
+            <label htmlFor="address">Address</label>
             <input
               type="text"
               id="address"
               name="address"
               value={formData.address}
               onChange={handleChange}
-              style={{ width: '100%', padding: '0.75rem', backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none' }}
+              style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none' }}
               required
             />
           </div>

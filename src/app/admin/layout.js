@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import AdminLayoutClient from './AdminLayoutClient';
 import AdminSidebarToggle from './AdminSidebarToggle';
+import UserDropdown from '@/components/UserDropdown';
 
 export const revalidate = 0; // Disable layout caching
 
@@ -98,13 +99,10 @@ export default async function AdminLayout({ children }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <AdminSidebarToggle />
             <div className="dashboard-title-area">
-              <h3 style={{ fontFamily: 'var(--font-title)', fontWeight: 700, letterSpacing: '0.5px', color: 'white' }}>अन्न सेवा (ANNA SEVA)</h3>
+              <h3 style={{ fontFamily: 'var(--font-title)', fontWeight: 700, letterSpacing: '0.5px' }}>अन्न सेवा (ANNA SEVA)</h3>
             </div>
           </div>
-          <div className="dashboard-user-dropdown">
-            <span className="avatar-icon">A</span>
-            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Admin</span>
-          </div>
+          <UserDropdown name="Admin" avatar="A" role="admin" />
         </header>
 
         <main className="dashboard-content">
@@ -113,7 +111,7 @@ export default async function AdminLayout({ children }) {
           <footer style={{ 
             marginTop: '4rem', 
             paddingTop: '2rem', 
-            borderTop: '1px solid rgba(255, 255, 255, 0.05)', 
+            borderTop: '1px solid var(--border-light)', 
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'space-between',

@@ -41,27 +41,27 @@ export default function AdminReportsPage() {
       </div>
 
       {/* Date filter form */}
-      <form onSubmit={handleGenerateReport} style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-end', backgroundColor: 'rgba(30, 36, 40, 0.5)', padding: '1.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
+      <form onSubmit={handleGenerateReport} style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-end', backgroundColor: '#ffffff', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
         <div className="form-group" style={{ margin: 0, width: '200px' }}>
-          <label style={{ color: 'white', fontSize: '0.85rem' }}>From Date</label>
+          <label style={{ fontSize: '0.85rem' }}>From Date</label>
           <input
             type="date"
             value={dateRange.from_date}
             onChange={(e) => setDateRange({ ...dateRange, from_date: e.target.value })}
             className="filter-input"
-            style={{ width: '100%', display: 'block', backgroundColor: '#1e2427', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}
+            style={{ width: '100%', display: 'block', backgroundColor: '#ffffff', color: 'var(--text-main)', border: '1px solid var(--border-light)', outline: 'none' }}
             required
           />
         </div>
         
         <div className="form-group" style={{ margin: 0, width: '200px' }}>
-          <label style={{ color: 'white', fontSize: '0.85rem' }}>To Date</label>
+          <label style={{ fontSize: '0.85rem' }}>To Date</label>
           <input
             type="date"
             value={dateRange.to_date}
             onChange={(e) => setDateRange({ ...dateRange, to_date: e.target.value })}
             className="filter-input"
-            style={{ width: '100%', display: 'block', backgroundColor: '#1e2427', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}
+            style={{ width: '100%', display: 'block', backgroundColor: '#ffffff', color: 'var(--text-main)', border: '1px solid var(--border-light)', outline: 'none' }}
             required
           />
         </div>
@@ -77,7 +77,7 @@ export default function AdminReportsPage() {
       </form>
 
       {error && (
-        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(245, 61, 86, 0.1)', color: '#ff667a', border: '1px solid rgba(245, 61, 86, 0.2)', marginBottom: '1.5rem' }}>
+        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#fef2f2', color: '#991b1b', border: '1px solid #fee2e2', marginBottom: '1.5rem' }}>
           {error}
         </div>
       )}
@@ -87,7 +87,7 @@ export default function AdminReportsPage() {
         <div className="animate-fade-in">
           
           {/* Stats Summary Cards */}
-          <h3 style={{ marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem', color: '#1cb896' }}>Report Metrics</h3>
+          <h3 style={{ marginBottom: '1.25rem', borderBottom: '1px solid var(--border-light)', paddingBottom: '0.5rem', color: 'var(--accent-teal-dark)' }}>Report Metrics</h3>
           <div className="stats-grid" style={{ marginBottom: '3rem' }}>
             <div className="stat-card blue" style={{ padding: '1.25rem' }}>
               <span className="stat-card-title" style={{ fontSize: '0.8rem' }}>Total Listed Food</span>

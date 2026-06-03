@@ -61,8 +61,8 @@ export default function ContactPage() {
     <div className="public-container animate-fade-in responsive-grid-contact">
 
       {/* Contact Info Panel */}
-      <div style={{ background: 'white', padding: '2.5rem', borderRadius: '16px', border: '1px solid var(--border-color)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
-        <h1 style={{ fontSize: '2.5rem', color: 'var(--text-dark)', marginBottom: '1rem', fontFamily: 'var(--font-title)' }}>
+      <div className="contact-info-panel">
+        <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', color: 'var(--text-dark)', marginBottom: '1rem', fontFamily: 'var(--font-title)' }}>
           Contact Us
         </h1>
         <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: '1.7', whiteSpace: 'pre-line', marginBottom: '2rem' }}>
@@ -74,21 +74,21 @@ export default function ContactPage() {
             <span style={{ fontSize: '1.5rem', backgroundColor: 'var(--primary-teal-light)', padding: '0.5rem', borderRadius: '8px', color: 'var(--primary-teal-dark)' }}>✉</span>
             <div>
               <div style={{ fontWeight: 600 }}>Email Address</div>
-              <div style={{ color: 'var(--text-muted)' }}>vspatil.charitabletrust@gmail.com</div>
+              <div style={{ color: 'var(--text-muted)', wordBreak: 'break-word' }}>vspatil.charitabletrust@gmail.com</div>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <span style={{ fontSize: '1.5rem', backgroundColor: 'var(--primary-teal-light)', padding: '0.5rem', borderRadius: '8px', color: 'var(--primary-teal-dark)' }}>📞</span>
             <div>
               <div style={{ fontWeight: 600 }}>Helpline Number</div>
-              <div style={{ color: 'var(--text-muted)' }}>+91 1800-111-222</div>
+              <div style={{ color: 'var(--text-muted)', wordBreak: 'break-word' }}>+91 1800-111-222</div>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <span style={{ fontSize: '1.5rem', backgroundColor: 'var(--primary-teal-light)', padding: '0.5rem', borderRadius: '8px', color: 'var(--primary-teal-dark)' }}>📍</span>
             <div>
               <div style={{ fontWeight: 600 }}>Central Office</div>
-              <div style={{ color: 'var(--text-muted)' }}>Matoshree Empire, Latur, Maharashtra, India</div>
+              <div style={{ color: 'var(--text-muted)', wordBreak: 'break-word' }}>Matoshree Empire, Latur, Maharashtra, India</div>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function ContactPage() {
 
       {/* Enquiry Form */}
       <div className="form-card" style={{ width: '100%', margin: '0' }}>
-        <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', color: 'var(--text-dark)' }}>Send Message</h2>
+        <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', marginBottom: '1.5rem', color: 'var(--text-dark)' }}>Send Message</h2>
 
         {status.message && (
           <div style={{

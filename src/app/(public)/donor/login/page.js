@@ -69,7 +69,7 @@ export default function DonorLoginPage() {
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="form-input"
               required
-              placeholder="e.g. swayam@donor.com"
+              placeholder="e.g. patil@donor.com"
             />
           </div>
 

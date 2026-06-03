@@ -195,7 +195,7 @@ export default function DonorRegisterPage() {
                 onChange={handleChange}
                 className="form-input"
                 required
-                placeholder="e.g. swayam@donor.com"
+                placeholder="e.g. patil@donor.com"
               />
             </div>
           </div>

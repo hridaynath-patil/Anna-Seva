@@ -132,9 +132,9 @@ export default async function DonorDashboardPage() {
         </Link>
       </div>
 
-      <div style={{ marginTop: '3rem', backgroundColor: 'rgba(30, 36, 40, 0.5)', padding: '2rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
-        <h3 style={{ marginBottom: '1rem', color: '#14b8a6' }}>Donor Coordination Tips</h3>
-        <p style={{ lineHeight: '1.6', opacity: 0.9 }}>
+      <div style={{ marginTop: '3rem', backgroundColor: '#ffffff', padding: '2rem', borderRadius: '12px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)' }}>
+        <h3 style={{ marginBottom: '1rem', color: 'var(--accent-teal-dark)' }}>Donor Coordination Tips</h3>
+        <p style={{ lineHeight: '1.6', color: 'var(--text-main)' }}>
           Keep your listing descriptions clear. When someone submits a request for your food, review their purpose and quantity requirements under the **My Food Requests** menu. You can **Approve** a claim (which provides them your consent) or **Reject** it. Once the recipient collects the food, click **Complete** to log the distribution success and mark your listing as claimed!
         </p>
       </div>

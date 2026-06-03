@@ -64,7 +64,7 @@ function DonorRequestsContent() {
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             className="filter-input"
-            style={{ backgroundColor: '#1e2427', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}
+            style={{ backgroundColor: '#ffffff', color: 'var(--text-main)', border: '1px solid var(--border-light)' }}
           >
             <option value="all">All Claims</option>
             <option value="new">New (Pending Review)</option>
@@ -75,7 +75,7 @@ function DonorRequestsContent() {
         </div>
       </div>
 
-      <div style={{ backgroundColor: 'rgba(20, 124, 100, 0.1)', border: '1px solid rgba(20, 124, 100, 0.2)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', fontSize: '0.9rem', opacity: 0.9 }}>
+      <div style={{ backgroundColor: '#f0fdfa', border: '1px solid #ccfbf1', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', fontSize: '0.9rem', color: '#0f766e' }}>
         💡 <strong>Your Authority:</strong> Review incoming requests from individuals or NGOs for food items you listed. You can **Approve** or **Reject** them. Once the requester takes away the food, mark the claim as **Complete** to automatically close the food listing in the system.
       </div>
 
@@ -104,7 +104,7 @@ function DonorRequestsContent() {
               {filteredRequests.map((r, index) => (
                 <tr key={r.id}>
                   <td>{index + 1}</td>
-                  <td style={{ fontWeight: 600, color: '#14b8a6' }}>{r.food_items}</td>
+                  <td style={{ fontWeight: 600, color: 'var(--accent-teal-dark)' }}>{r.food_items}</td>
                   <td style={{ fontWeight: 600 }}>{r.requester_name}</td>
                   <td>{r.requester_mobile}</td>
                   <td>{r.quantity}</td>

@@ -173,7 +173,7 @@ export default function AvailableFoodPage() {
     <div className="public-container animate-fade-in">
       <div style={{ borderBottom: '1px solid var(--border-light)', paddingBottom: '2rem', marginBottom: '3rem' }}>
         <span style={{ color: 'var(--accent-teal)', fontWeight: '800', fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>SURPLUS DISTRIBUTION NETWORK</span>
-        <h1 style={{ fontSize: '2.75rem', fontFamily: 'var(--font-title)', fontWeight: 800, marginTop: '0.25rem' }}>
+        <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.75rem)', fontFamily: 'var(--font-title)', fontWeight: 800, marginTop: '0.25rem' }}>
           Available Food Directory
         </h1>
         <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginTop: '0.5rem', maxWidth: '800px' }}>
@@ -182,7 +182,7 @@ export default function AvailableFoodPage() {
       </div>
 
       {/* Directory Search Filters Panel */}
-      <form onSubmit={handleSearchSubmit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', alignItems: 'flex-end', backgroundColor: '#f8fafc', padding: '2rem', borderRadius: '16px', border: '1px solid var(--border-light)', marginBottom: '3rem' }}>
+      <form onSubmit={handleSearchSubmit} className="directory-filters-form">
         <div className="form-group" style={{ margin: 0 }}>
           <label style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--primary-navy-light)' }}>Search Keywords</label>
           <input
@@ -245,7 +245,7 @@ export default function AvailableFoodPage() {
         </div>
       </form>
 
-      {/* Directory Table */}
+      {/* Directory Listings */}
       {loading ? (
         <div style={{ textAlign: 'center', padding: '5rem', fontSize: '1.2rem', color: 'var(--text-muted)' }}>Loading food catalog...</div>
       ) : listings.length === 0 ? (
@@ -254,54 +254,147 @@ export default function AvailableFoodPage() {
           <p>Try resetting the search filters or check back later.</p>
         </div>
       ) : (
-        <div className="public-table-container">
-          <table className="custom-table">
-            <thead>
-              <tr>
-                <th style={{ width: '50px', textAlign: 'center' }}>S.NO</th>
-                <th>Contact</th>
-                <th>Food Description</th>
-                <th>Collection Address</th>
-                <th>Location</th>
-                <th>Status</th>
-                <th>Date Cataloged</th>
-                <th style={{ width: '130px', textAlign: 'center' }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {listings.map((listing, index) => {
-                const [datePart, timePart] = listing.created_at ? listing.created_at.split(' ') : ['', ''];
-                return (
-                  <tr key={listing.id}>
-                    <td style={{ fontWeight: 700, textAlign: 'center', color: 'var(--accent-teal)' }}>{index + 1}</td>
-                    <td>
+        <>
+          {/* Desktop Table View */}
+          <div className="public-table-container">
+            <table className="custom-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '50px', textAlign: 'center' }}>S.NO</th>
+                  <th>Contact</th>
+                  <th>Food Description</th>
+                  <th>Collection Address</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Date Cataloged</th>
+                  <th style={{ width: '130px', textAlign: 'center' }}>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {listings.map((listing, index) => {
+                  const [datePart, timePart] = listing.created_at ? listing.created_at.split(' ') : ['', ''];
+                  return (
+                    <tr key={listing.id}>
+                      <td style={{ fontWeight: 700, textAlign: 'center', color: 'var(--accent-teal)' }}>{index + 1}</td>
+                      <td>
+                        <div style={{ fontWeight: 700, color: 'var(--primary-navy)' }}>{listing.contact_person}</div>
+                        <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>{listing.mobile}</div>
+                      </td>
+                      <td style={{ fontWeight: 600, color: 'var(--primary-navy)' }}>{listing.food_items}</td>
+                      <td style={{ fontSize: '0.85rem', lineHeight: '1.4', maxWidth: '220px' }}>{listing.address}</td>
+                      <td>
+                        <div style={{ fontWeight: 600 }}>{listing.city_name}</div>
+                        <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{listing.state_name}</div>
+                      </td>
+                      <td>
+                        {listing.status === 'approved' ? (
+                          <span className="status-badge approved" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6', borderColor: 'rgba(59, 130, 246, 0.3)' }}>Request Approved</span>
+                        ) : listing.status === 'claimed' ? (
+                          <span className="status-badge completed" style={{ backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#10b981', borderColor: 'rgba(16, 185, 129, 0.3)' }}>Request Completed</span>
+                        ) : (
+                          <span className="status-badge available">Available</span>
+                        )}
+                      </td>
+                      <td style={{ fontSize: '0.82rem' }}>
+                        <div>{datePart}</div>
+                        <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '0.1rem' }}>{timePart}</div>
+                      </td>
+                      <td style={{ textAlign: 'center' }}>
+                        {listing.status === 'approved' ? (
+                          <button
+                            className="form-submit-btn"
+                            style={{ fontSize: '0.82rem', padding: '0.5rem 0.85rem', width: 'auto', margin: 0, backgroundColor: '#cbd5e1', color: '#64748b', cursor: 'not-allowed', boxShadow: 'none' }}
+                            disabled
+                          >
+                            Claimed
+                          </button>
+                        ) : listing.status === 'claimed' ? (
+                          <button
+                            className="form-submit-btn"
+                            style={{ fontSize: '0.82rem', padding: '0.5rem 0.85rem', width: 'auto', margin: 0, backgroundColor: '#e2e8f0', color: '#94a3b8', cursor: 'not-allowed', boxShadow: 'none' }}
+                            disabled
+                          >
+                            Completed
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => openRequestModal(listing)}
+                            className="form-submit-btn"
+                            style={{ fontSize: '0.82rem', padding: '0.5rem 0.85rem', width: 'auto', margin: 0 }}
+                          >
+                            Claim Food
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Card Grid View */}
+          <div className="food-directory-mobile-cards">
+            {listings.map((listing, index) => {
+              const [datePart, timePart] = listing.created_at ? listing.created_at.split(' ') : ['', ''];
+              return (
+                <div 
+                  key={listing.id} 
+                  style={{ 
+                    background: 'white', 
+                    borderRadius: '12px', 
+                    padding: '1.25rem', 
+                    border: '1px solid var(--border-light)', 
+                    boxShadow: 'var(--shadow-sm)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.75rem'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontWeight: 800, color: 'var(--accent-teal)', fontSize: '0.85rem' }}>
+                      #{index + 1}
+                    </span>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textAlign: 'right' }}>
+                      {datePart} {timePart}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--primary-navy)', marginBottom: '0.25rem' }}>
+                      {listing.food_items}
+                    </h3>
+                    <div style={{ fontSize: '0.85rem', color: '#475569', lineHeight: '1.4' }}>
+                      <strong>Address:</strong> {listing.address}
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', borderTop: '1px dashed var(--border-light)', paddingTop: '0.75rem', fontSize: '0.85rem' }}>
+                    <div>
                       <div style={{ fontWeight: 700, color: 'var(--primary-navy)' }}>{listing.contact_person}</div>
-                      <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>{listing.mobile}</div>
-                    </td>
-                    <td style={{ fontWeight: 600, color: 'var(--primary-navy)' }}>{listing.food_items}</td>
-                    <td style={{ fontSize: '0.85rem', lineHeight: '1.4', maxWidth: '220px' }}>{listing.address}</td>
-                    <td>
-                      <div style={{ fontWeight: 600 }}>{listing.city_name}</div>
-                      <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{listing.state_name}</div>
-                    </td>
-                    <td>
+                      <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>{listing.mobile}</div>
+                    </div>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>{listing.city_name}</div>
+                      <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>{listing.state_name}</div>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px dashed var(--border-light)', paddingTop: '0.75rem', marginTop: '0.25rem' }}>
+                    <div>
                       {listing.status === 'approved' ? (
-                        <span className="status-badge approved" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6', borderColor: 'rgba(59, 130, 246, 0.3)' }}>Request Approved</span>
+                        <span className="status-badge approved" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6', borderColor: 'rgba(59, 130, 246, 0.3)', padding: '0.25rem 0.6rem', fontSize: '0.7rem' }}>Approved</span>
                       ) : listing.status === 'claimed' ? (
-                        <span className="status-badge completed" style={{ backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#10b981', borderColor: 'rgba(16, 185, 129, 0.3)' }}>Request Completed</span>
+                        <span className="status-badge completed" style={{ backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#10b981', borderColor: 'rgba(16, 185, 129, 0.3)', padding: '0.25rem 0.6rem', fontSize: '0.7rem' }}>Completed</span>
                       ) : (
-                        <span className="status-badge available">Available</span>
+                        <span className="status-badge available" style={{ padding: '0.25rem 0.6rem', fontSize: '0.7rem' }}>Available</span>
                       )}
-                    </td>
-                    <td style={{ fontSize: '0.82rem' }}>
-                      <div>{datePart}</div>
-                      <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '0.1rem' }}>{timePart}</div>
-                    </td>
-                    <td style={{ textAlign: 'center' }}>
+                    </div>
+                    <div>
                       {listing.status === 'approved' ? (
                         <button
                           className="form-submit-btn"
-                          style={{ fontSize: '0.82rem', padding: '0.5rem 0.85rem', width: 'auto', margin: 0, backgroundColor: '#cbd5e1', color: '#64748b', cursor: 'not-allowed', boxShadow: 'none' }}
+                          style={{ fontSize: '0.8rem', padding: '0.45rem 0.75rem', width: 'auto', margin: 0, backgroundColor: '#cbd5e1', color: '#64748b', cursor: 'not-allowed', boxShadow: 'none' }}
                           disabled
                         >
                           Claimed
@@ -309,7 +402,7 @@ export default function AvailableFoodPage() {
                       ) : listing.status === 'claimed' ? (
                         <button
                           className="form-submit-btn"
-                          style={{ fontSize: '0.82rem', padding: '0.5rem 0.85rem', width: 'auto', margin: 0, backgroundColor: '#e2e8f0', color: '#94a3b8', cursor: 'not-allowed', boxShadow: 'none' }}
+                          style={{ fontSize: '0.8rem', padding: '0.45rem 0.75rem', width: 'auto', margin: 0, backgroundColor: '#e2e8f0', color: '#94a3b8', cursor: 'not-allowed', boxShadow: 'none' }}
                           disabled
                         >
                           Completed
@@ -318,18 +411,18 @@ export default function AvailableFoodPage() {
                         <button
                           onClick={() => openRequestModal(listing)}
                           className="form-submit-btn"
-                          style={{ fontSize: '0.82rem', padding: '0.5rem 0.85rem', width: 'auto', margin: 0 }}
+                          style={{ fontSize: '0.8rem', padding: '0.45rem 0.75rem', width: 'auto', margin: 0 }}
                         >
                           Claim Food
                         </button>
                       )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
       )}
 
       {/* Claim Modal */}

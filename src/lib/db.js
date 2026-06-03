@@ -310,19 +310,25 @@ export function initDB() {
     }
   }
 
-  // Seed Donors (Need 3 to match dashboard photo "Total Food Donor: 3")
+  // Seed Donors
   try {
     const donorCount = db.prepare("SELECT COUNT(*) as count FROM users WHERE role = 'donor'").get()?.count;
     if (donorCount === 0) {
       const mh = db.prepare("SELECT id FROM states WHERE name = 'Maharashtra'").get()?.id;
-      const kolhapur = db.prepare("SELECT id FROM cities WHERE name = 'Kolhapur'").get()?.id;
-      const up = db.prepare("SELECT id FROM states WHERE name = 'Uttar Pradesh'").get()?.id;
-      const allahabad = db.prepare("SELECT id FROM cities WHERE name = 'Allahabad'").get()?.id;
-      const ap = db.prepare("SELECT id FROM states WHERE name = 'Andhra Pradesh'").get()?.id;
-      const vishakhapatnam = db.prepare("SELECT id FROM cities WHERE name = 'Visakhapatnam'").get()?.id;
-
-      // Resolve or dynamically insert Latur to prevent ReferenceError
+      
+      // Resolve or dynamically insert Pune and Latur
+      let pune;
       let latur;
+
+      const puneRow = db.prepare("SELECT id FROM cities WHERE name = 'Pune'").get();
+      if (puneRow) {
+        pune = puneRow.id;
+      } else if (mh) {
+        const insertCity = db.prepare('INSERT INTO cities (state_id, name) VALUES (?, ?)');
+        insertCity.run(mh, 'Pune');
+        pune = db.prepare("SELECT id FROM cities WHERE name = 'Pune'").get()?.id;
+      }
+
       const laturRow = db.prepare("SELECT id FROM cities WHERE name = 'Latur'").get();
       if (laturRow) {
         latur = laturRow.id;
@@ -332,85 +338,75 @@ export function initDB() {
         latur = db.prepare("SELECT id FROM cities WHERE name = 'Latur'").get()?.id;
       }
 
-      if (mh && kolhapur && up && allahabad && ap && vishakhapatnam && latur) {
+      if (mh && pune && latur) {
         const insertDonor = db.prepare(`
           INSERT INTO users (name, email, password, role, mobile, address, state_id, city_id, status)
           VALUES (?, ?, ?, 'donor', ?, ?, ?, ?, 'approved')
         `);
 
-        insertDonor.run('Hriday', 'Hriday@donor.com', hashPassword('donor123'), '1478523699', 'b755 latur', mh, latur);
-        insertDonor.run('Rahul', 'rahul@donor.com', hashPassword('donor123'), '9874563210', 'b552 sehore', ap, vishakhapatnam);
-        insertDonor.run('Aditya', 'aditya@donor.com', hashPassword('donor123'), '9852364710', 'b744 kolhapur', up, allahabad);
+        insertDonor.run('Hridaynath Patil', 'hriday@donor.com', hashPassword('hriday123'), '7666484077', 'Vanaz Metro Station, Kothrud', mh, pune);
+        insertDonor.run('Bhagwat Patil', 'bhagwat@donor.com', hashPassword('bhagwat123'), '9420434447', 'Matoshree Empire, Latur', mh, latur);
       }
     }
   } catch (e) {
     console.error('Failed to seed donors:', e.message);
   }
 
-  // Seed Food Listings (Need 4 to match dashboard photo "Total Listed Food: 4")
+  // Seed Food Listings
   try {
     const listingCount = db.prepare('SELECT COUNT(*) as count FROM food_listings').get()?.count;
     if (listingCount === 0) {
-      const hriday = db.prepare("SELECT id FROM users WHERE email = 'Hriday@donor.com'").get()?.id;
-      const rahul = db.prepare("SELECT id FROM users WHERE email = 'rahul@donor.com'").get()?.id;
-      const aditya = db.prepare("SELECT id FROM users WHERE email = 'aditya@donor.com'").get()?.id;
+      const hriday = db.prepare("SELECT * FROM users WHERE email = 'hriday@donor.com'").get();
+      const bhagwat = db.prepare("SELECT * FROM users WHERE email = 'bhagwat@donor.com'").get();
 
-      const mh = db.prepare("SELECT id FROM states WHERE name = 'Maharashtra'").get()?.id;
-      const kolhapur = db.prepare("SELECT id FROM cities WHERE name = 'Kolhapur'").get()?.id;
-      const up = db.prepare("SELECT id FROM states WHERE name = 'Uttar Pradesh'").get()?.id;
-      const allahabad = db.prepare("SELECT id FROM cities WHERE name = 'Allahabad'").get()?.id;
-      const aligarh = db.prepare("SELECT id FROM cities WHERE name = 'Aligarh'").get()?.id;
-      const ap = db.prepare("SELECT id FROM states WHERE name = 'Andhra Pradesh'").get()?.id;
-      const vishakhapatnam = db.prepare("SELECT id FROM cities WHERE name = 'Visakhapatnam'").get()?.id;
-
-      if (hriday && rahul && aditya && mh && kolhapur && up && allahabad && aligarh && ap && vishakhapatnam) {
+      if (hriday && bhagwat) {
         const insertListing = db.prepare(`
-          INSERT INTO food_listings (id, donor_id, contact_person, mobile, food_items, description, address, state_id, city_id, status, created_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          INSERT INTO food_listings (donor_id, contact_person, mobile, food_items, description, address, state_id, city_id, status)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `);
 
-        // Match exactly the 3 listings shown in the first screenshot available food table
-        insertListing.run(1, hriday, 'Hriday', '1478523699', 'Dal,Rice,Roti,Panner', 'Freshly prepared lunch package.', 'b755 kolhapur', up, allahabad, 'available', '2024-02-24 14:54:51');
-        insertListing.run(2, rahul, 'Rahul', '9874563210', 'Dal Maknhi,Bread,Rice', 'Dinner pack from a small gathering.', 'b552 sehore', ap, vishakhapatnam, 'available', '2024-01-23 00:00:00');
-        insertListing.run(3, aditya, 'Aditya', '9852364710', 'Dal,Rice,Mix Veg,Panner', 'Excess food from home party.', 'b744 kolhapur', up, aligarh, 'available', '2024-08-24 00:00:00');
-        insertListing.run(4, hriday, 'Hriday', '1478523699', 'Khichdi', 'Healthy dinner food.', 'b755 kolhapur', mh, kolhapur, 'available', '2024-08-25 12:00:00');
+        // Hridaynath's listings
+        insertListing.run(hriday.id, hriday.name, hriday.mobile, 'Chapati', 'For 100 People (Quantity: 100)', hriday.address, hriday.state_id, hriday.city_id, 'approved');
+        insertListing.run(hriday.id, hriday.name, hriday.mobile, 'Icecream', 'For 100 People (Quantity: 100)', hriday.address, hriday.state_id, hriday.city_id, 'approved');
+        insertListing.run(hriday.id, hriday.name, hriday.mobile, 'Dalkhicdi', 'For 100 People (Quantity: 100)', hriday.address, hriday.state_id, hriday.city_id, 'claimed');
+
+        // Bhagwat's listings
+        insertListing.run(bhagwat.id, bhagwat.name, bhagwat.mobile, 'Thali', 'For 100 People (Quantity: 100)', bhagwat.address, bhagwat.state_id, bhagwat.city_id, 'approved');
+        insertListing.run(bhagwat.id, bhagwat.name, bhagwat.mobile, 'Veg Pulav', 'For 100 People (Quantity: 100)', bhagwat.address, bhagwat.state_id, bhagwat.city_id, 'claimed');
       }
     }
   } catch (e) {
-    console.error('Failed to seed listings:', e.message);
+    console.error('Failed to seed food listings:', e.message);
   }
 
-  // Seed Requests (Need 6 total to match "All Requests: 6" in admin dashboard)
+  // Seed Requests
   try {
     const requestCount = db.prepare('SELECT COUNT(*) as count FROM requests').get()?.count;
     if (requestCount === 0) {
-      const up = db.prepare("SELECT id FROM states WHERE name = 'Uttar Pradesh'").get()?.id;
-      const allahabad = db.prepare("SELECT id FROM cities WHERE name = 'Allahabad'").get()?.id;
       const mh = db.prepare("SELECT id FROM states WHERE name = 'Maharashtra'").get()?.id;
-      const kolhapur = db.prepare("SELECT id FROM cities WHERE name = 'Kolhapur'").get()?.id;
+      const pune = db.prepare("SELECT id FROM cities WHERE name = 'Pune'").get()?.id;
+      const latur = db.prepare("SELECT id FROM cities WHERE name = 'Latur'").get()?.id;
 
-      const l1 = db.prepare("SELECT id FROM food_listings WHERE id = 1").get();
-      const l2 = db.prepare("SELECT id FROM food_listings WHERE id = 2").get();
-      const l3 = db.prepare("SELECT id FROM food_listings WHERE id = 3").get();
-      const l4 = db.prepare("SELECT id FROM food_listings WHERE id = 4").get();
+      const chapati = db.prepare("SELECT id FROM food_listings WHERE food_items = 'Chapati'").get()?.id;
+      const icecream = db.prepare("SELECT id FROM food_listings WHERE food_items = 'Icecream'").get()?.id;
+      const dalkhicdi = db.prepare("SELECT id FROM food_listings WHERE food_items = 'Dalkhicdi'").get()?.id;
+      const thali = db.prepare("SELECT id FROM food_listings WHERE food_items = 'Thali'").get()?.id;
+      const vegPulav = db.prepare("SELECT id FROM food_listings WHERE food_items = 'Veg Pulav'").get()?.id;
 
-      if (up && allahabad && mh && kolhapur && l1 && l2 && l3 && l4) {
+      if (mh && pune && latur && chapati && icecream && dalkhicdi && thali && vegPulav) {
         const insertRequest = db.prepare(`
-          INSERT INTO requests (listing_id, requester_name, requester_mobile, address, state_id, city_id, reason, quantity, status, created_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          INSERT INTO requests (listing_id, requester_name, requester_mobile, address, state_id, city_id, reason, quantity, status)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `);
 
-        // 4 Completed
-        insertRequest.run(1, 'NGO Ashraya', '8888888881', 'Colony Street 1', up, allahabad, 'For local slum children feed', '15 plates', 'completed', '2024-02-25 10:00:00');
-        insertRequest.run(1, 'Shelter Home', '8888888882', 'Colony Street 2', up, allahabad, 'Daily dinner support', '10 plates', 'completed', '2024-02-26 10:00:00');
-        insertRequest.run(2, 'Helping Hands', '8888888883', 'Sehore Main Rd', up, allahabad, 'Feeding homeless', '20 plates', 'completed', '2024-01-24 10:00:00');
-        insertRequest.run(3, 'Care Foundation', '8888888884', 'Aligarh Market', up, allahabad, 'Distribution to street dwellers', '12 plates', 'completed', '2024-08-25 10:00:00');
+        // Claims on Hridaynath's listings
+        insertRequest.run(chapati, 'Sewa Foundation', '9876543210', 'Near Kothrud Depot, Pune', mh, pune, 'Distribution to roadside dwellers', '80 plates', 'approved');
+        insertRequest.run(icecream, 'Hope Orphanage', '9822334455', 'Senapati Bapat Road, Pune', mh, pune, 'Dessert for kids after dinner drive', '100 cups', 'approved');
+        insertRequest.run(dalkhicdi, 'Annapurna Kitchen', '9158000999', 'Deccan Gymkhana, Pune', mh, pune, 'Senior citizen home dinner distribution', '90 packs', 'completed');
 
-        // 1 Rejected
-        insertRequest.run(2, 'Unknown Entity', '9991112223', 'Fake Address', up, allahabad, 'Selfish request', '50 plates', 'rejected', '2024-01-25 11:00:00');
-
-        // 1 New
-        insertRequest.run(4, 'Sewa NGO', '7776665554', 'Kolhapur Town Hall', mh, kolhapur, 'Feeding kids program', '8 plates', 'new', '2026-06-03 12:00:00');
+        // Claims on Bhagwat's listings
+        insertRequest.run(thali, 'Latur Relief NGO', '9405001122', 'Gandhi Chowk, Latur', mh, latur, 'Free meals for patients relatives at civil hospital', '100 Thalis', 'approved');
+        insertRequest.run(vegPulav, 'Samarpan Trust', '9850123456', 'Ausa Road, Latur', mh, latur, 'Slum area feeding program', '100 plates', 'completed');
       }
     }
   } catch (e) {

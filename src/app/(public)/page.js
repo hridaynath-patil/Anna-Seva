@@ -198,19 +198,19 @@ export default function HomePage() {
       </section>
 
       {/* Charitable Trust CTA block */}
-      <section style={{ backgroundColor: 'var(--primary-navy)', color: 'white', padding: '6rem 2rem', textAlign: 'center' }}>
+      <section style={{ backgroundColor: 'var(--accent-teal-light)', color: 'var(--primary-navy)', padding: '6rem 2rem', textAlign: 'center', borderTop: '1px solid var(--border-light)' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2.5rem', color: 'white', marginBottom: '1.5rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
+          <h2 style={{ fontSize: '2.5rem', color: 'var(--primary-navy)', marginBottom: '1.5rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
             Help Us Prevent Hunger
           </h2>
-          <p style={{ fontSize: '1.25rem', opacity: 0.9, lineHeight: '1.8', marginBottom: '2.5rem' }}>
+          <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', lineHeight: '1.8', marginBottom: '2.5rem' }}>
             Whether you represent a banquet hall with surplus catering or an NGO looking for support, Anna Seva provides a modern, direct, and verified platform to coordinate logistics and distribute fresh meals.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/donor/register" className="form-submit-btn" style={{ width: 'auto', padding: '1rem 2.5rem', borderRadius: '50px', textDecoration: 'none', margin: 0 }}>
               Register as Donor
             </Link>
-            <Link href="/contact" className="action-btn view" style={{ padding: '1rem 2.5rem', borderRadius: '50px', backgroundColor: 'transparent', border: '1px solid rgba(255,255,255,0.3)', color: 'white', fontSize: '1rem', textDecoration: 'none' }}>
+            <Link href="/contact" style={{ padding: '1rem 2.5rem', borderRadius: '50px', backgroundColor: 'transparent', border: '2px solid var(--primary-navy)', color: 'var(--primary-navy)', fontWeight: '700', fontSize: '1rem', textDecoration: 'none', transition: 'all 0.25s ease' }}>
               Contact Trust Office
             </Link>
           </div>

@@ -61,12 +61,12 @@ export default function AdminPagesEditorPage() {
       </div>
 
       {error && (
-        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(245, 61, 86, 0.1)', color: '#ff667a', border: '1px solid rgba(245, 61, 86, 0.2)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#fef2f2', color: '#991b1b', border: '1px solid #fee2e2', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
           {error}
         </div>
       )}
       {success && (
-        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(82, 201, 108, 0.1)', color: '#7aff96', border: '1px solid rgba(82, 201, 108, 0.2)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#f0fdf4', color: '#166534', border: '1px solid #dcfce7', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
           {success}
         </div>
       )}
@@ -74,9 +74,9 @@ export default function AdminPagesEditorPage() {
       {loading ? (
         <div style={{ textAlign: 'center', padding: '2rem' }}>Loading editor data...</div>
       ) : (
-        <form onSubmit={handleSubmit} style={{ backgroundColor: 'rgba(30, 36, 40, 0.5)', padding: '2.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+        <form onSubmit={handleSubmit} style={{ backgroundColor: '#ffffff', padding: '2.5rem', borderRadius: '12px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)' }}>
           <div className="form-group" style={{ marginBottom: '2rem' }}>
-            <label htmlFor="aboutText" style={{ color: 'white', fontSize: '1.1rem', marginBottom: '0.75rem' }}>About Us Page Content</label>
+            <label htmlFor="aboutText" style={{ fontSize: '1.1rem', marginBottom: '0.75rem' }}>About Us Page Content</label>
             <textarea
               id="aboutText"
               rows="8"
@@ -85,10 +85,10 @@ export default function AdminPagesEditorPage() {
               style={{
                 width: '100%',
                 padding: '1rem',
-                backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                border: '1.5px solid rgba(255, 255, 255, 0.1)',
+                backgroundColor: '#ffffff',
+                border: '1.5px solid var(--border-light)',
                 borderRadius: '8px',
-                color: 'white',
+                color: 'var(--text-main)',
                 fontFamily: 'var(--font-body)',
                 outline: 'none',
                 lineHeight: '1.6'
@@ -99,7 +99,7 @@ export default function AdminPagesEditorPage() {
           </div>
 
           <div className="form-group" style={{ marginBottom: '2rem' }}>
-            <label htmlFor="contactText" style={{ color: 'white', fontSize: '1.1rem', marginBottom: '0.75rem' }}>Contact Page Main Description</label>
+            <label htmlFor="contactText" style={{ fontSize: '1.1rem', marginBottom: '0.75rem' }}>Contact Page Main Description</label>
             <textarea
               id="contactText"
               rows="6"
@@ -108,10 +108,10 @@ export default function AdminPagesEditorPage() {
               style={{
                 width: '100%',
                 padding: '1rem',
-                backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                border: '1.5px solid rgba(255, 255, 255, 0.1)',
+                backgroundColor: '#ffffff',
+                border: '1.5px solid var(--border-light)',
                 borderRadius: '8px',
-                color: 'white',
+                color: 'var(--text-main)',
                 fontFamily: 'var(--font-body)',
                 outline: 'none',
                 lineHeight: '1.6'

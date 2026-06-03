@@ -120,23 +120,23 @@ export default function AdminStatesPage() {
         </div>
 
         {/* Add State Form */}
-        <div style={{ backgroundColor: 'rgba(30, 36, 40, 0.5)', padding: '2rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
-          <h3 style={{ marginBottom: '1.5rem', color: '#1cb896' }}>Add New State</h3>
+        <div style={{ backgroundColor: '#ffffff', padding: '2rem', borderRadius: '12px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)' }}>
+          <h3 style={{ marginBottom: '1.5rem', color: 'var(--accent-teal-dark)' }}>Add New State</h3>
 
           {error && (
-            <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(245, 61, 86, 0.1)', color: '#ff667a', border: '1px solid rgba(245, 61, 86, 0.2)', marginBottom: '1rem', fontSize: '0.9rem' }}>
+            <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#fef2f2', color: '#991b1b', border: '1px solid #fee2e2', marginBottom: '1rem', fontSize: '0.9rem' }}>
               {error}
             </div>
           )}
           {success && (
-            <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(82, 201, 108, 0.1)', color: '#7aff96', border: '1px solid rgba(82, 201, 108, 0.2)', marginBottom: '1rem', fontSize: '0.9rem' }}>
+            <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#f0fdf4', color: '#166534', border: '1px solid #dcfce7', marginBottom: '1rem', fontSize: '0.9rem' }}>
               {success}
             </div>
           )}
 
           <form onSubmit={handleAddState}>
             <div className="form-group">
-              <label htmlFor="stateName" style={{ color: 'white' }}>State Name</label>
+              <label htmlFor="stateName">State Name</label>
               <input
                 type="text"
                 id="stateName"
@@ -145,10 +145,10 @@ export default function AdminStatesPage() {
                 style={{
                   width: '100%',
                   padding: '0.75rem 1rem',
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  border: '1.5px solid rgba(255, 255, 255, 0.1)',
+                  backgroundColor: '#ffffff',
+                  border: '1.5px solid var(--border-light)',
                   borderRadius: '6px',
-                  color: 'white',
+                  color: 'var(--text-main)',
                   outline: 'none'
                 }}
                 required

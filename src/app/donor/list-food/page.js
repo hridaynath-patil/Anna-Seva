@@ -114,12 +114,12 @@ export default function DonorListFoodPage() {
       <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '2rem', marginBottom: '1.5rem' }}>List Surplus Food</h2>
 
       {error && (
-        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(245, 61, 86, 0.1)', color: '#ff667a', border: '1px solid rgba(245, 61, 86, 0.2)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#fef2f2', color: '#991b1b', border: '1px solid #fee2e2', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
           {error}
         </div>
       )}
       {success && (
-        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(82, 201, 108, 0.1)', color: '#7aff96', border: '1px solid rgba(82, 201, 108, 0.2)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+        <div style={{ padding: '0.75rem', borderRadius: '6px', backgroundColor: '#f0fdf4', color: '#166534', border: '1px solid #dcfce7', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
           {success}
         </div>
       )}
@@ -127,30 +127,30 @@ export default function DonorListFoodPage() {
       {loading ? (
         <div style={{ padding: '2rem', textAlign: 'center' }}>Loading form details...</div>
       ) : (
-        <form onSubmit={handleSubmit} style={{ backgroundColor: 'rgba(30, 36, 40, 0.5)', padding: '2.5rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+        <form onSubmit={handleSubmit} style={{ backgroundColor: '#ffffff', padding: '2.5rem', borderRadius: '12px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-sm)' }}>
           <div className="responsive-grid-2col">
             <div className="form-group">
-              <label htmlFor="contact_person" style={{ color: 'white' }}>Contact Person Name</label>
+              <label htmlFor="contact_person">Contact Person Name</label>
               <input
                 type="text"
                 id="contact_person"
                 name="contact_person"
                 value={formData.contact_person}
                 onChange={handleChange}
-                style={{ width: '100%', padding: '0.75rem', backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none' }}
+                style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none' }}
                 required
               />
             </div>
             
             <div className="form-group">
-              <label htmlFor="mobile" style={{ color: 'white' }}>Contact Mobile Number</label>
+              <label htmlFor="mobile">Contact Mobile Number</label>
               <input
                 type="tel"
                 id="mobile"
                 name="mobile"
                 value={formData.mobile}
                 onChange={handleChange}
-                style={{ width: '100%', padding: '0.75rem', backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none' }}
+                style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none' }}
                 required
                 pattern="[0-9]{10}"
               />
@@ -158,7 +158,7 @@ export default function DonorListFoodPage() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="food_items" style={{ color: 'white' }}>Food Items Name (Comma-separated)</label>
+            <label htmlFor="food_items">Food Items Name (Comma-separated)</label>
             <input
               type="text"
               id="food_items"
@@ -166,13 +166,13 @@ export default function DonorListFoodPage() {
               value={formData.food_items}
               onChange={handleChange}
               placeholder="e.g. Rice, Dal, Mixed Veg, Chapati"
-              style={{ width: '100%', padding: '0.75rem', backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none' }}
+              style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none' }}
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="description" style={{ color: 'white' }}>Description / Expiry Info (Optional)</label>
+            <label htmlFor="description">Description / Expiry Info (Optional)</label>
             <textarea
               id="description"
               name="description"
@@ -180,19 +180,19 @@ export default function DonorListFoodPage() {
               onChange={handleChange}
               rows="3"
               placeholder="e.g. Prepared for 20 people. Good for 6 hours."
-              style={{ width: '100%', padding: '0.75rem', backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none', fontFamily: 'var(--font-body)' }}
+              style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none', fontFamily: 'var(--font-body)' }}
             />
           </div>
 
           <div className="responsive-grid-2col">
             <div className="form-group">
-              <label htmlFor="state_id" style={{ color: 'white' }}>State</label>
+              <label htmlFor="state_id">State</label>
               <select
                 id="state_id"
                 name="state_id"
                 value={formData.state_id}
                 onChange={handleStateChange}
-                style={{ width: '100%', padding: '0.75rem', backgroundColor: '#1e2427', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none' }}
+                style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none' }}
                 required
               >
                 <option value="">Select State</option>
@@ -203,13 +203,13 @@ export default function DonorListFoodPage() {
             </div>
             
             <div className="form-group">
-              <label htmlFor="city_id" style={{ color: 'white' }}>City</label>
+              <label htmlFor="city_id">City</label>
               <select
                 id="city_id"
                 name="city_id"
                 value={formData.city_id}
                 onChange={handleChange}
-                style={{ width: '100%', padding: '0.75rem', backgroundColor: '#1e2427', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none' }}
+                style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none' }}
                 required
                 disabled={!formData.state_id}
               >
@@ -222,14 +222,14 @@ export default function DonorListFoodPage() {
           </div>
 
           <div className="form-group" style={{ marginBottom: '2rem' }}>
-            <label htmlFor="address" style={{ color: 'white' }}>Collection Address</label>
+            <label htmlFor="address">Collection Address</label>
             <input
               type="text"
               id="address"
               name="address"
               value={formData.address}
               onChange={handleChange}
-              style={{ width: '100%', padding: '0.75rem', backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'white', outline: 'none' }}
+              style={{ width: '100%', padding: '0.75rem', backgroundColor: '#ffffff', border: '1px solid var(--border-light)', borderRadius: '6px', color: 'var(--text-main)', outline: 'none' }}
               required
               placeholder="Address where food is located"
             />
