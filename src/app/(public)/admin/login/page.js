@@ -73,7 +73,7 @@ export default function AdminLoginPage() {
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="form-input"
               required
-              placeholder="e.g. admin@foodseva.com"
+              placeholder="e.g. admin@annaseva.org"
             />
           </div>
 

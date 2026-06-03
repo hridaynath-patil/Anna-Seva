@@ -95,7 +95,7 @@ export default async function AdminLayout({ children }) {
       <div className="dashboard-main">
         <header className="dashboard-header">
           <div className="dashboard-title-area">
-            <h3 style={{ fontFamily: 'var(--font-title)', fontWeight: 600 }}>FOOD WASTE MANAGEMENT SYSTEM</h3>
+            <h3 style={{ fontFamily: 'var(--font-title)', fontWeight: 700, letterSpacing: '0.5px', color: 'white' }}>अन्न सेवा (ANNA SEVA)</h3>
           </div>
           <div className="dashboard-user-dropdown">
             <span className="avatar-icon">A</span>

@@ -226,7 +226,7 @@ export function initDB() {
       INSERT INTO users (name, email, password, role, mobile, address, status)
       VALUES (?, ?, ?, 'admin', '9999999999', 'Admin HQ, New Delhi', 'approved')
     `);
-    insertAdmin.run('System Admin', 'admin@foodseva.com', hashPassword('admin123'));
+    insertAdmin.run('System Admin', 'admin@annaseva.org', hashPassword('admin123'));
   }
 
   // Seed Pages content if not exists

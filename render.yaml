@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: food-seva
+    name: anna-seva
     runtime: node
     buildCommand: npm install && npm run build
     startCommand: npm run start
@@ -8,6 +8,6 @@ services:
       - key: NODE_ENV
         value: production
     disk:
-      name: food-seva-db
+      name: anna-seva-db
       mountPath: /opt/render/project/src/data
       sizeGB: 1

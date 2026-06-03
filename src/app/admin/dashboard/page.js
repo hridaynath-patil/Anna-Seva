@@ -112,7 +112,7 @@ export default function AdminDashboardPage() {
       <div style={{ marginTop: '3rem', backgroundColor: 'rgba(30, 36, 40, 0.5)', padding: '2rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
         <h3 style={{ marginBottom: '1rem', color: '#1cb896' }}>System Welcome</h3>
         <p style={{ lineHeight: '1.6', opacity: 0.9 }}>
-          Welcome to the **Food Waste Management System (Anna Seva)** administrative control panel. Use the sidebar menu to coordinate food collections, add states and cities, monitor active food listings, approve/reject incoming claim requests, respond to enquires, and download system activity reports.
+          Welcome to the **अन्न सेवा (Anna Seva)** administrative control panel. Use the sidebar menu to coordinate food collections, add states and cities, monitor active food listings, approve/reject incoming claim requests, respond to enquires, and download system activity reports.
         </p>
       </div>
     </div>
