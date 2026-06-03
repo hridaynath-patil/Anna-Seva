@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: food-seva
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+    disk:
+      name: food-seva-db
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
