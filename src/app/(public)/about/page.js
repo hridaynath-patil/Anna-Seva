@@ -1,6 +1,6 @@
 import { query } from '@/lib/db';
 import Image from 'next/image';
-import trusteeImg from './trustee.png';
+import trustLogoImg from './trust_logo.jpg';
 
 export const revalidate = 0; // Disable cache for admin edits
 
@@ -64,11 +64,11 @@ export default function AboutPage() {
           position: 'relative',
           width: '160px',
           height: '160px',
-          borderRadius: '12px',
+          borderRadius: '50%',
           overflow: 'hidden',
           border: '4px solid white',
           boxShadow: '0 8px 20px rgba(0, 0, 0, 0.08)',
-          backgroundColor: '#ebd9c4',
+          backgroundColor: '#ffffff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -76,13 +76,15 @@ export default function AboutPage() {
           margin: '0 auto'
         }}>
           <Image 
-            src={trusteeImg} 
-            alt="Hridaynath Bhagwat Patil" 
+            src={trustLogoImg} 
+            alt="Shri Vishwanathrao Shamrao Patil Charitable Trust Logo" 
             placeholder="blur"
             style={{ 
-              objectFit: 'contain', 
+              objectFit: 'cover', 
+              objectPosition: 'center 20%',
               width: '100%', 
-              height: '100%' 
+              height: '100%',
+              transform: 'scale(1.35)'
             }} 
           />
         </div>
