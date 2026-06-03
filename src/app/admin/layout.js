@@ -1,0 +1,110 @@
+import { getSession } from '@/lib/auth';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
+import AdminLayoutClient from './AdminLayoutClient';
+
+export const revalidate = 0; // Disable layout caching
+
+export default async function AdminLayout({ children }) {
+  const session = await getSession();
+
+  if (!session || session.role !== 'admin') {
+    redirect('/admin/login');
+  }
+
+  return (
+    <div className="dashboard-layout">
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="sidebar-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <img 
+            src="/icon.png" 
+            alt="Anna Seva Logo" 
+            style={{ 
+              width: '36px', 
+              height: '36px', 
+              borderRadius: '50%',
+              objectFit: 'cover',
+              border: '1.5px solid var(--accent-teal)'
+            }} 
+          />
+          <span style={{ display: 'flex', flexDirection: 'column' }}>
+            <span style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--accent-teal)', lineHeight: '1.1' }}>अन्न सेवा</span>
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#94a3b8', letterSpacing: '1px', marginTop: '2px' }}>ADMIN</span>
+          </span>
+        </div>
+        <ul className="sidebar-menu">
+          <li className="sidebar-item">
+            <Link href="/admin/dashboard" className="sidebar-link">
+              📊 Dashboard
+            </Link>
+          </li>
+          <li className="sidebar-item">
+            <Link href="/admin/states" className="sidebar-link">
+              🗺 State
+            </Link>
+          </li>
+          <li className="sidebar-item">
+            <Link href="/admin/cities" className="sidebar-link">
+              🏙 City
+            </Link>
+          </li>
+          <li className="sidebar-item">
+            <Link href="/admin/donors" className="sidebar-link">
+              👥 Reg Food Donors
+            </Link>
+          </li>
+          <li className="sidebar-item">
+            <Link href="/admin/food-listings" className="sidebar-link">
+              🍎 Listed Foods
+            </Link>
+          </li>
+          <li className="sidebar-item">
+            <Link href="/admin/requests" className="sidebar-link">
+              ✉ Food Requests
+            </Link>
+          </li>
+          <li className="sidebar-item">
+            <Link href="/admin/enquiries" className="sidebar-link">
+              💬 Enquiry
+            </Link>
+          </li>
+          <li className="sidebar-item">
+            <Link href="/admin/pages" className="sidebar-link">
+              📄 Pages
+            </Link>
+          </li>
+          <li className="sidebar-item">
+            <Link href="/admin/reports" className="sidebar-link">
+              📈 Reports
+            </Link>
+          </li>
+          <li className="sidebar-item">
+            <Link href="/admin/search" className="sidebar-link">
+              🔍 Search Listed Food
+            </Link>
+          </li>
+        </ul>
+        <div className="sidebar-footer">
+          <div className="sidebar-user">Logged: {session.name}</div>
+          <AdminLayoutClient />
+        </div>
+      </aside>
+
+      {/* Main Panel */}
+      <div className="dashboard-main">
+        <header className="dashboard-header">
+          <div className="dashboard-title-area">
+            <h3 style={{ fontFamily: 'var(--font-title)', fontWeight: 600 }}>FOOD WASTE MANAGEMENT SYSTEM</h3>
+          </div>
+          <div className="dashboard-user-dropdown">
+            <span className="avatar-icon">A</span>
+            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Admin</span>
+          </div>
+        </header>
+
+        <main className="dashboard-content">{children}</main>
+      </div>
+    </div>
+  );
+}
