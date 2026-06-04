@@ -92,9 +92,34 @@ export function translateSql(sql) {
   return translated;
 }
 
+let dbInitialized = false;
+let dbInitializationPromise = null;
+
+export async function ensureDbInitialized() {
+  if (dbInitialized) return;
+  if (dbInitializationPromise) {
+    return dbInitializationPromise;
+  }
+
+  dbInitializationPromise = (async () => {
+    try {
+      await initDB();
+      dbInitialized = true;
+      console.log('[Anna Seva] Database initialization finished.');
+    } catch (error) {
+      dbInitializationPromise = null; // Reset to allow retry
+      console.error('[Anna Seva] Failed to initialize database:', error);
+      throw error;
+    }
+  })();
+
+  return dbInitializationPromise;
+}
+
 // Database helper functions (asynchronous wrapper)
 export const query = {
   async exec(sql) {
+    await ensureDbInitialized();
     if (usePostgres) {
       return await pgPool.query(translateSql(sql));
     } else {
@@ -103,6 +128,7 @@ export const query = {
   },
   
   async all(sql, params = []) {
+    await ensureDbInitialized();
     if (usePostgres) {
       const pgSql = translateSql(sql);
       const res = await pgPool.query(pgSql, params);
@@ -113,6 +139,7 @@ export const query = {
   },
 
   async get(sql, params = []) {
+    await ensureDbInitialized();
     if (usePostgres) {
       const pgSql = translateSql(sql);
       const res = await pgPool.query(pgSql, params);
@@ -123,6 +150,7 @@ export const query = {
   },
 
   async run(sql, params = []) {
+    await ensureDbInitialized();
     if (usePostgres) {
       let pgSql = translateSql(sql);
       const isInsert = pgSql.trim().toUpperCase().startsWith('INSERT');
@@ -772,9 +800,4 @@ export async function initDB() {
   }
 }
 
-// Initialize immediately on load
-initDB().then(() => {
-  console.log('[Anna Seva] Database initialization finished.');
-}).catch((error) => {
-  console.error('[Anna Seva] Failed to initialize database:', error);
-});
+// Database will be initialized lazily on the first query
