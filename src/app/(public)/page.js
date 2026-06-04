@@ -207,6 +207,9 @@ export default function HomePage() {
             Whether you represent a banquet hall with surplus catering or an NGO looking for support, Anna Seva provides a modern, direct, and verified platform to coordinate logistics and distribute fresh meals.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/donate" className="form-submit-btn" style={{ width: 'auto', padding: '1rem 2.5rem', borderRadius: '50px', textDecoration: 'none', margin: 0, background: 'linear-gradient(135deg, #d97706, #b45309)', boxShadow: '0 4px 16px rgba(217, 119, 6, 0.3)' }}>
+              💝 Donate Now
+            </Link>
             <Link href="/donor/register" className="form-submit-btn" style={{ width: 'auto', padding: '1rem 2.5rem', borderRadius: '50px', textDecoration: 'none', margin: 0 }}>
               Register as Donor
             </Link>
