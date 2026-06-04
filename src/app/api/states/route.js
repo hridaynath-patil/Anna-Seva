@@ -3,7 +3,7 @@ import { getSession } from '@/lib/auth';
 
 export async function GET() {
   try {
-    const states = query.all('SELECT * FROM states ORDER BY name ASC');
+    const states = await query.all('SELECT * FROM states ORDER BY name ASC');
     return Response.json(states);
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
@@ -23,12 +23,12 @@ export async function POST(request) {
     }
 
     // Check duplicate
-    const existing = query.get('SELECT id FROM states WHERE name = ?', [name]);
+    const existing = await query.get('SELECT id FROM states WHERE name = ?', [name]);
     if (existing) {
       return Response.json({ error: 'State already exists' }, { status: 400 });
     }
 
-    query.run('INSERT INTO states (name) VALUES (?)', [name]);
+    await query.run('INSERT INTO states (name) VALUES (?)', [name]);
     return Response.json({ success: true });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
@@ -49,7 +49,7 @@ export async function DELETE(request) {
       return Response.json({ error: 'State ID is required' }, { status: 400 });
     }
 
-    query.run('DELETE FROM states WHERE id = ?', [id]);
+    await query.run('DELETE FROM states WHERE id = ?', [id]);
     return Response.json({ success: true });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });

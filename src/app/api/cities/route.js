@@ -8,7 +8,7 @@ export async function GET(request) {
 
     let cities;
     if (stateId) {
-      cities = query.all(`
+      cities = await query.all(`
         SELECT c.*, s.name as state_name 
         FROM cities c 
         JOIN states s ON c.state_id = s.id 
@@ -16,7 +16,7 @@ export async function GET(request) {
         ORDER BY c.name ASC
       `, [stateId]);
     } else {
-      cities = query.all(`
+      cities = await query.all(`
         SELECT c.*, s.name as state_name 
         FROM cities c 
         JOIN states s ON c.state_id = s.id 
@@ -43,12 +43,12 @@ export async function POST(request) {
     }
 
     // Check duplicate in same state
-    const existing = query.get('SELECT id FROM cities WHERE state_id = ? AND name = ?', [state_id, name]);
+    const existing = await query.get('SELECT id FROM cities WHERE state_id = ? AND name = ?', [state_id, name]);
     if (existing) {
       return Response.json({ error: 'City already exists in this state' }, { status: 400 });
     }
 
-    query.run('INSERT INTO cities (state_id, name) VALUES (?, ?)', [state_id, name]);
+    await query.run('INSERT INTO cities (state_id, name) VALUES (?, ?)', [state_id, name]);
     return Response.json({ success: true });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
@@ -69,7 +69,7 @@ export async function DELETE(request) {
       return Response.json({ error: 'City ID is required' }, { status: 400 });
     }
 
-    query.run('DELETE FROM cities WHERE id = ?', [id]);
+    await query.run('DELETE FROM cities WHERE id = ?', [id]);
     return Response.json({ success: true });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });

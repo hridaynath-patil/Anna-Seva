@@ -8,7 +8,7 @@ export async function GET() {
       return Response.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
-    const enquiries = query.all('SELECT * FROM enquiries ORDER BY created_at DESC');
+    const enquiries = await query.all('SELECT * FROM enquiries ORDER BY created_at DESC');
     return Response.json(enquiries);
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
@@ -23,7 +23,7 @@ export async function POST(request) {
       return Response.json({ error: 'All fields are required' }, { status: 400 });
     }
 
-    query.run(`
+    await query.run(`
       INSERT INTO enquiries (name, email, mobile, message, status)
       VALUES (?, ?, ?, ?, 'new')
     `, [name, email, mobile, message]);
@@ -47,7 +47,7 @@ export async function PUT(request) {
       return Response.json({ error: 'ID and status are required' }, { status: 400 });
     }
 
-    query.run('UPDATE enquiries SET status = ? WHERE id = ?', [status, id]);
+    await query.run('UPDATE enquiries SET status = ? WHERE id = ?', [status, id]);
     return Response.json({ success: true });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
@@ -68,7 +68,7 @@ export async function DELETE(request) {
       return Response.json({ error: 'Enquiry ID is required' }, { status: 400 });
     }
 
-    query.run('DELETE FROM enquiries WHERE id = ?', [id]);
+    await query.run('DELETE FROM enquiries WHERE id = ?', [id]);
     return Response.json({ success: true });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });

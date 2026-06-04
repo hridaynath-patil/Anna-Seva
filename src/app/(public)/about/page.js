@@ -4,10 +4,10 @@ import trustLogoImg from './trust_logo.jpg';
 
 export const revalidate = 0; // Disable cache for admin edits
 
-export default function AboutPage() {
+export default async function AboutPage() {
   let aboutText = '';
   try {
-    const page = query.get("SELECT about_text FROM pages WHERE id = 'main'");
+    const page = await query.get("SELECT about_text FROM pages WHERE id = 'main'");
     aboutText = page ? page.about_text : 'Loading...';
   } catch (e) {
     aboutText = 'Failed to load page content.';

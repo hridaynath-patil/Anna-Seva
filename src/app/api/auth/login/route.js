@@ -10,7 +10,7 @@ export async function POST(request) {
     }
 
     const hashed = hashPassword(password);
-    const user = query.get('SELECT * FROM users WHERE email = ? AND password = ?', [email, hashed]);
+    const user = await query.get('SELECT * FROM users WHERE email = ? AND password = ?', [email, hashed]);
 
     if (!user) {
       return Response.json({ error: 'Invalid email or password' }, { status: 401 });

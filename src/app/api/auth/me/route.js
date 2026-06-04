@@ -9,7 +9,7 @@ export async function GET() {
     }
 
     // Fetch fresh user data from DB to reflect any edits (mobile, state, city)
-    const user = query.get('SELECT id, name, email, role, mobile, address, state_id, city_id, created_at FROM users WHERE id = ?', [session.id]);
+    const user = await query.get('SELECT id, name, email, role, mobile, address, state_id, city_id, created_at FROM users WHERE id = ?', [session.id]);
     
     if (!user) {
       return Response.json({ user: null });
@@ -34,7 +34,7 @@ export async function PUT(request) {
       return Response.json({ error: 'All fields are required' }, { status: 400 });
     }
 
-    query.run(`
+    await query.run(`
       UPDATE users
       SET name = ?, mobile = ?, address = ?, state_id = ?, city_id = ?
       WHERE id = ?

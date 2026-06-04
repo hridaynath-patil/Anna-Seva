@@ -3,15 +3,15 @@ import Link from 'next/link';
 
 export const revalidate = 0; // Live statistics on render
 
-export default function HomePage() {
+export default async function HomePage() {
   let donorCount = 0;
   let foodCount = 0;
   let completedCount = 0;
 
   try {
-    donorCount = query.get("SELECT COUNT(*) as count FROM users WHERE role = 'donor'")?.count || 0;
-    foodCount = query.get("SELECT COUNT(*) as count FROM food_listings")?.count || 0;
-    completedCount = query.get("SELECT COUNT(*) as count FROM requests WHERE status = 'completed'")?.count || 0;
+    donorCount = (await query.get("SELECT COUNT(*) as count FROM users WHERE role = 'donor'"))?.count || 0;
+    foodCount = (await query.get("SELECT COUNT(*) as count FROM food_listings"))?.count || 0;
+    completedCount = (await query.get("SELECT COUNT(*) as count FROM requests WHERE status = 'completed'"))?.count || 0;
   } catch (e) {
     console.error('Error fetching home stats:', e);
   }
