@@ -431,43 +431,88 @@ export default function DonatePage() {
             </div>
 
             {/* Bank Details Card */}
-            <div className="donate-info-card">
-              <div style={{
-                width: '56px',
-                height: '56px',
-                borderRadius: '14px',
-                backgroundColor: 'rgba(217, 119, 6, 0.1)',
-                color: 'var(--accent-gold)',
-                fontSize: '1.5rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem',
-                fontWeight: 800
-              }}>🏦</div>
-              <h3 style={{ fontSize: '1.15rem', marginBottom: '1.25rem', color: 'var(--primary-navy)' }}>Bank Transfer Details</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', fontSize: '0.9rem' }}>
-                <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Account Name</span>
-                  <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontSize: '0.85rem' }}>
-                    SHRI VISHWANATHRAO SHAMRAO PATIL CH. TRUST
-                  </div>
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+            <div className="donate-info-card" style={{ position: 'relative', overflow: 'hidden' }}>
+              <style dangerouslySetInnerHTML={{ __html: `
+                @media (max-width: 640px) {
+                  .bank-details-card-inner {
+                    margin-right: 0 !important;
+                  }
+                  .qr-container-absolute {
+                    position: static !important;
+                    margin: 1.25rem auto 0 !important;
+                  }
+                }
+              `}} />
+
+              <div className="bank-details-card-inner" style={{ marginRight: '190px', transition: 'margin 0.3s ease' }}>
+                <div style={{
+                  width: '56px',
+                  height: '56px',
+                  borderRadius: '14px',
+                  backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                  color: 'var(--accent-gold)',
+                  fontSize: '1.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '1.25rem',
+                  fontWeight: 800
+                }}>🏦</div>
+                <h3 style={{ fontSize: '1.15rem', marginBottom: '1.25rem', color: 'var(--primary-navy)' }}>Bank Transfer Details</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', fontSize: '0.9rem' }}>
                   <div>
-                    <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Account No.</span>
-                    <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontFamily: 'monospace', letterSpacing: '1px' }}>
-                      000100780002245
+                    <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Account Name</span>
+                    <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontSize: '0.85rem' }}>
+                      SHRI VISHWANATHRAO SHAMRAO PATIL CH. TRUST
                     </div>
                   </div>
-                  <div>
-                    <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>IFSC Code</span>
-                    <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontFamily: 'monospace', letterSpacing: '1px' }}>
-                      HDFC0YNSBL
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                    <div>
+                      <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Account No.</span>
+                      <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontFamily: 'monospace', letterSpacing: '1px' }}>
+                        000100780002245
+                      </div>
+                    </div>
+                    <div>
+                      <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>IFSC Code</span>
+                      <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontFamily: 'monospace', letterSpacing: '1px' }}>
+                        HDFC0YNSBL
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+
+              {/* PhonePe QR code in top right (or stacked on mobile) */}
+              <div className="qr-container-absolute" style={{
+                position: 'absolute',
+                top: '1.5rem',
+                right: '1.5rem',
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '0.45rem',
+                background: '#f8fafc',
+                padding: '0.6rem',
+                borderRadius: '12px',
+                border: '1px dashed #cbd5e1',
+                width: '162px'
+              }}>
+                <img 
+                  src="/phonepe_qr.jpg" 
+                  alt="PhonePe QR Code" 
+                  style={{
+                    width: '146px',
+                    height: '146px',
+                    objectFit: 'cover',
+                    borderRadius: '6px',
+                    backgroundColor: 'white'
+                  }}
+                />
+                <span style={{ fontSize: '0.65rem', fontWeight: 800, color: '#475569', letterSpacing: '0.3px' }}>Scan with PhonePe</span>
+              </div>
+
               <div style={{
                 marginTop: '1.25rem',
                 padding: '0.85rem 1rem',
