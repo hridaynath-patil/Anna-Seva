@@ -226,7 +226,7 @@ export function initDB() {
       INSERT INTO users (name, email, password, role, mobile, address, status)
       VALUES (?, ?, ?, 'admin', '9999999999', 'Admin HQ, New Delhi', 'approved')
     `);
-    insertAdmin.run('System Admin', 'admin@annaseva.org', hashPassword('admin123'));
+    insertAdmin.run('System Admin', 'admin@annaseva.org', hashPassword('Hriday@1234'));
   }
 
   // Seed Pages content if not exists
@@ -344,8 +344,8 @@ export function initDB() {
           VALUES (?, ?, ?, 'donor', ?, ?, ?, ?, 'approved')
         `);
 
-        insertDonor.run('Hridaynath Patil', 'hriday@donor.com', hashPassword('hriday123'), '7666484077', 'Vanaz Metro Station, Kothrud', mh, pune);
-        insertDonor.run('Bhagwat Patil', 'bhagwat@donor.com', hashPassword('bhagwat123'), '9420434447', 'Matoshree Empire, Latur', mh, latur);
+        insertDonor.run('Hridaynath Patil', 'hriday@donor.com', hashPassword('Hriday@1234'), '7666484077', 'Vanaz Metro Station, Kothrud', mh, pune);
+        insertDonor.run('Bhagwat Patil', 'bhagwat@donor.com', hashPassword('Hriday@1234'), '9420434447', 'Matoshree Empire, Latur', mh, latur);
       }
     }
   } catch (e) {
