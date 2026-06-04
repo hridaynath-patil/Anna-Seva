@@ -3,6 +3,11 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import pg from 'pg';
+import dns from 'dns';
+
+// Force Node.js to prefer IPv4 resolution to prevent ENETUNREACH errors on networks with incomplete IPv6 support
+dns.setDefaultResultOrder('ipv4first');
+
 const { Pool } = pg;
 
 let usePostgres = !!process.env.DATABASE_URL;
