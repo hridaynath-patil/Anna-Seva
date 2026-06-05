@@ -176,6 +176,9 @@ export async function initDB() {
           const hostname = dbUrl.hostname;
           
           if (!/^(?:\d{1,3}\.){3}\d{1,3}$/.test(hostname) && !hostname.includes(':')) {
+            if (hostname.startsWith('db.') && (hostname.endsWith('.supabase.co') || hostname.endsWith('.supabase.net'))) {
+              console.warn('[Anna Seva] WARNING: You are using a direct connection URL (db.*.supabase.co) which is IPv6-only. Render\'s network does not support IPv6 outbound traffic, which will cause ENETUNREACH. Please update your DATABASE_URL in Render to use the connection pooler URL (e.g., *.pooler.supabase.com) which supports IPv4.');
+            }
             console.log(`[Anna Seva] Resolving database hostname ${hostname} to IPv4...`);
             const { address } = await dns.promises.lookup(hostname, { family: 4 });
             console.log(`[Anna Seva] Resolved database hostname ${hostname} to IPv4: ${address}`);
