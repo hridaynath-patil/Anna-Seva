@@ -73,7 +73,7 @@ export default function DonorLoginPage() {
             />
           </div>
 
-          <div className="form-group" style={{ marginBottom: '1.75rem' }}>
+          <div className="form-group" style={{ marginBottom: '0.5rem' }}>
             <label htmlFor="password">Password</label>
             <div style={{ position: 'relative' }}>
               <input
@@ -108,6 +108,20 @@ export default function DonorLoginPage() {
                 {showPassword ? 'Hide' : 'Show'}
               </button>
             </div>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1.75rem' }}>
+            <Link 
+              href="/forgot-password" 
+              style={{ 
+                color: 'var(--accent-teal)', 
+                fontSize: '0.85rem', 
+                fontWeight: 600, 
+                textDecoration: 'none' 
+              }}
+            >
+              Forgot Password?
+            </Link>
           </div>
 
           <button

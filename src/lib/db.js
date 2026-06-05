@@ -266,9 +266,18 @@ async function initPostgresDB() {
       state_id INTEGER REFERENCES states(id) ON DELETE SET NULL,
       city_id INTEGER REFERENCES cities(id) ON DELETE SET NULL,
       status VARCHAR(50) NOT NULL DEFAULT 'pending' CHECK(status IN ('pending', 'approved', 'rejected')),
+      reset_token VARCHAR(255),
+      reset_token_expiry TIMESTAMP WITH TIME ZONE,
       created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
     );
   `);
+
+  try {
+    await pgPool.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS reset_token VARCHAR(255)');
+    await pgPool.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS reset_token_expiry TIMESTAMP WITH TIME ZONE');
+  } catch (e) {
+    console.log('[Anna Seva] PostgreSQL users table alter skipped or already applied:', e.message);
+  }
 
   await pgPool.query(`
     CREATE TABLE IF NOT EXISTS food_listings (
@@ -580,6 +589,8 @@ async function initSQLiteDB() {
       state_id INTEGER,
       city_id INTEGER,
       status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending', 'approved', 'rejected')),
+      reset_token TEXT,
+      reset_token_expiry TEXT,
       created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
       FOREIGN KEY(state_id) REFERENCES states(id) ON DELETE SET NULL,
       FOREIGN KEY(city_id) REFERENCES cities(id) ON DELETE SET NULL
@@ -591,6 +602,12 @@ async function initSQLiteDB() {
   } catch (e) {}
   try {
     db.exec("UPDATE users SET status = 'approved' WHERE role = 'admin';");
+  } catch (e) {}
+  try {
+    db.exec("ALTER TABLE users ADD COLUMN reset_token TEXT;");
+  } catch (e) {}
+  try {
+    db.exec("ALTER TABLE users ADD COLUMN reset_token_expiry TEXT;");
   } catch (e) {}
 
   db.exec(`
