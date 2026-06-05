@@ -2,7 +2,7 @@
 
 An elegantly designed, full-stack food rescue, redistribution, and donation web application. Operated under the patronage of the **Shri Vishwanathrao Shamrao Patil Charitable Trust**, Anna Seva connects verified donors (banquets, caterers, restaurants, and households) with local recipient organizations (NGOs, shelter homes, and volunteers) to direct surplus food batches to those who need them most.
 
-🔗 **Live Deployment:** [https://anna-seva.onrender.com/](https://anna-seva.onrender.com/)
+🔗 **Live Deployment:** [https://vspatilcharitabletrust.online/](https://vspatilcharitabletrust.online/)
 
 ---
 
