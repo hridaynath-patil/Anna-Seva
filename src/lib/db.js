@@ -36,21 +36,6 @@ function setupSqlite() {
 
 if (usePostgres) {
   console.log('[Anna Seva] Attempting to use Supabase/PostgreSQL database.');
-  const poolConfig = {
-    connectionString: process.env.DATABASE_URL,
-    connectionTimeoutMillis: 4000, // Timeout after 4 seconds to prevent long hangs
-  };
-  if (process.env.NODE_ENV === 'production' || process.env.DATABASE_URL.includes('supabase.co') || process.env.DATABASE_URL.includes('supabase')) {
-    poolConfig.ssl = {
-      rejectUnauthorized: false
-    };
-  }
-  pgPool = new Pool(poolConfig);
-  
-  // Register an error listener to prevent unhandled process crashes from idle pool clients
-  pgPool.on('error', (err) => {
-    console.error('[Anna Seva] Unexpected error on idle PostgreSQL client:', err.message);
-  });
 } else {
   setupSqlite();
 }
@@ -183,6 +168,43 @@ export async function initDB() {
     try {
       console.log('[Anna Seva] Initializing PostgreSQL tables...');
       
+      if (!pgPool) {
+        let connectionString = process.env.DATABASE_URL;
+        
+        try {
+          const dbUrl = new URL(connectionString);
+          const hostname = dbUrl.hostname;
+          
+          if (!/^(?:\d{1,3}\.){3}\d{1,3}$/.test(hostname) && !hostname.includes(':')) {
+            console.log(`[Anna Seva] Resolving database hostname ${hostname} to IPv4...`);
+            const { address } = await dns.promises.lookup(hostname, { family: 4 });
+            console.log(`[Anna Seva] Resolved database hostname ${hostname} to IPv4: ${address}`);
+            dbUrl.hostname = address;
+            connectionString = dbUrl.toString();
+          }
+        } catch (dnsError) {
+          console.warn('[Anna Seva] Database hostname resolution to IPv4 failed, using default hostname:', dnsError.message);
+        }
+
+        const poolConfig = {
+          connectionString,
+          connectionTimeoutMillis: 4000, // Timeout after 4 seconds to prevent long hangs
+        };
+        
+        if (process.env.NODE_ENV === 'production' || process.env.DATABASE_URL.includes('supabase.co') || process.env.DATABASE_URL.includes('supabase')) {
+          poolConfig.ssl = {
+            rejectUnauthorized: false
+          };
+        }
+        
+        pgPool = new Pool(poolConfig);
+        
+        // Register an error listener to prevent unhandled process crashes from idle pool clients
+        pgPool.on('error', (err) => {
+          console.error('[Anna Seva] Unexpected error on idle PostgreSQL client:', err.message);
+        });
+      }
+      
       // Test connection with a simple query first (will throw if DNS/connection fails)
       await pgPool.query('SELECT 1');
       
@@ -198,6 +220,7 @@ export async function initDB() {
         } catch (endErr) {
           console.error('[Anna Seva] Error ending PostgreSQL pool:', endErr.message);
         }
+        pgPool = null;
       }
       
       usePostgres = false;
