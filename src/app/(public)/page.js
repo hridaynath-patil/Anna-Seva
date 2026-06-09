@@ -1,5 +1,7 @@
 import { query } from '@/lib/db';
 import Link from 'next/link';
+import NewsCarousel from '@/components/NewsCarousel';
+
 
 export const revalidate = 0; // Live statistics on render
 
@@ -59,6 +61,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* News Coverage Carousel */}
+      <NewsCarousel />
 
       {/* Core Mission Callout */}
       <section style={{ padding: '5rem 2rem', borderBottom: '1px solid var(--border-light)', backgroundColor: '#ffffff' }}>
