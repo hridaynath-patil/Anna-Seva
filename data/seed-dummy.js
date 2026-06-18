@@ -126,7 +126,10 @@ async function seed() {
 
     const passwordHash = hashPassword("Password@123");
 
-    for (const u of dummyUsers) {
+    const pad = (num) => String(num).padStart(2, '0');
+
+    for (let userIndex = 0; userIndex < dummyUsers.length; userIndex++) {
+      const u = dummyUsers[userIndex];
       console.log(`Processing user: ${u.name} (${u.email})`);
       const cityId = cityIds[u.cityName];
 
@@ -149,7 +152,10 @@ async function seed() {
       }
 
       // Add 2 foods for this user
-      for (const food of u.foods) {
+      for (let foodIndex = 0; foodIndex < u.foods.length; foodIndex++) {
+        const food = u.foods[foodIndex];
+        const listingCreatedAt = `2026-06-18 ${pad(9 + userIndex)}:${pad(10 + foodIndex * 20)}:00`;
+
         // Check if listing already exists for this food name and donor
         let listing = await query.get(`
           SELECT id FROM food_listings 
@@ -160,10 +166,10 @@ async function seed() {
         if (!listing) {
           // Insert food listing (set status to 'claimed' since all food requests will be completed)
           const sql = `
-            INSERT INTO food_listings (donor_id, contact_person, mobile, food_items, description, address, state_id, city_id, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'claimed')
+            INSERT INTO food_listings (donor_id, contact_person, mobile, food_items, description, address, state_id, city_id, status, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'claimed', ?)
           `;
-          const params = [userId, u.name, u.mobile, food.name, `${food.desc} (Quantity: ${food.qty})`, u.address, stateId, cityId];
+          const params = [userId, u.name, u.mobile, food.name, `${food.desc} (Quantity: ${food.qty})`, u.address, stateId, cityId, listingCreatedAt];
           console.log("SQL:", sql);
           console.log("Params:", params, "Length:", params.length);
           const insertListingRes = await query.run(sql, params);
@@ -172,17 +178,19 @@ async function seed() {
         } else {
           listingId = listing.id;
           console.log(`    Food listing already exists: ${food.name} (ID: ${listingId}). Updating details...`);
-          // Ensure it's marked as claimed and has the correct mobile/contact_person/details
+          // Ensure it's marked as claimed and has the correct mobile/contact_person/details/created_at
           await query.run(`
             UPDATE food_listings 
-            SET status = 'claimed', mobile = ?, contact_person = ?, address = ?, state_id = ?, city_id = ?
+            SET status = 'claimed', mobile = ?, contact_person = ?, address = ?, state_id = ?, city_id = ?, created_at = ?
             WHERE id = ?
-          `, [u.mobile, u.name, u.address, stateId, cityId, listingId]);
+          `, [u.mobile, u.name, u.address, stateId, cityId, listingCreatedAt, listingId]);
         }
 
         // Add 5 completed requests for this food listing
-        let requestIndex = 1;
-        for (const ngo of ngos) {
+        for (let ngoIndex = 0; ngoIndex < ngos.length; ngoIndex++) {
+          const ngo = ngos[ngoIndex];
+          const requestCreatedAt = `2026-06-18 ${pad(9 + userIndex)}:${pad(10 + foodIndex * 20 + ngoIndex * 3 + 1)}:00`;
+
           // Check if request already exists from this NGO for this listing
           const reqCheck = await query.get(`
             SELECT id FROM requests 
@@ -191,8 +199,8 @@ async function seed() {
 
           if (!reqCheck) {
             await query.run(`
-              INSERT INTO requests (listing_id, requester_name, requester_mobile, address, state_id, city_id, reason, quantity, status)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+              INSERT INTO requests (listing_id, requester_name, requester_mobile, address, state_id, city_id, reason, quantity, status, created_at)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             `, [
               listingId,
               ngo.name,
@@ -201,9 +209,16 @@ async function seed() {
               stateId,
               cityId,
               ngo.reason,
-              `Batch ${requestIndex++} (${food.qty})`,
-              'completed'
+              `Batch ${ngoIndex + 1} (${food.qty})`,
+              'completed',
+              requestCreatedAt
             ]);
+          } else {
+            await query.run(`
+              UPDATE requests
+              SET created_at = ?
+              WHERE id = ?
+            `, [requestCreatedAt, reqCheck.id]);
           }
         }
         console.log(`      Generated 5 completed requests for food: ${food.name}`);
