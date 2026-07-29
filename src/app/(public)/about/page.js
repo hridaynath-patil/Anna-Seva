@@ -1,6 +1,6 @@
 import { query } from '@/lib/db';
 import Image from 'next/image';
-import trustLogoImg from './trust_logo.jpg';
+import hridaynathImg from './hridaynath.jpg';
 
 export const revalidate = 0; // Disable cache for admin edits
 
@@ -76,11 +76,11 @@ export default function AboutPage() {
           margin: '0 auto'
         }}>
           <Image
-            src={trustLogoImg}
-            alt="Shri Vishwanathrao Shamrao Patil Charitable Trust Logo"
+            src={hridaynathImg}
+            alt="Shri. Hridaynath Bhagwat Patil"
             placeholder="blur"
             style={{
-              objectFit: 'contain',
+              objectFit: 'cover',
               width: '100%',
               height: '100%'
             }}
@@ -104,14 +104,14 @@ export default function AboutPage() {
             marginBottom: '1.25rem',
             letterSpacing: '0.05em'
           }}>
-            MANAGING TRUSTEE
+            Founding President
           </p>
 
           <div className="about-trustee-list">
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <span style={{ fontSize: '1.3rem', lineHeight: '1', width: '1.3rem', display: 'flex', justifyContent: 'center' }}>🏛️</span>
               <span style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.5' }}>
-                Managing Trustee at <strong>Shri. Vishwanathrao Shamrao Patil Trust, Latur</strong>
+                Founding President at <strong>Shri. Vishwanathrao Shamrao Patil Trust, Latur</strong>
               </span>
             </div>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -123,7 +123,7 @@ export default function AboutPage() {
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <span style={{ color: 'var(--primary-teal)', fontSize: '1.5rem', lineHeight: '1', width: '1.3rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>•</span>
               <span style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.5' }}>
-                B.Tech CSE'25 Graduate from <strong>VIT Bhopal University</strong>
+                B.Tech CSE'25 Graduate from <strong>Vellore Institute of Technology</strong>
               </span>
             </div>
           </div>
