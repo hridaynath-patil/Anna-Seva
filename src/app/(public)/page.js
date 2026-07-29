@@ -1,17 +1,19 @@
 import { query } from '@/lib/db';
 import Link from 'next/link';
+import NewsCarousel from '@/components/NewsCarousel';
+
 
 export const revalidate = 0; // Live statistics on render
 
-export default function HomePage() {
+export default async function HomePage() {
   let donorCount = 0;
   let foodCount = 0;
   let completedCount = 0;
 
   try {
-    donorCount = query.get("SELECT COUNT(*) as count FROM users WHERE role = 'donor'")?.count || 0;
-    foodCount = query.get("SELECT COUNT(*) as count FROM food_listings")?.count || 0;
-    completedCount = query.get("SELECT COUNT(*) as count FROM requests WHERE status = 'completed'")?.count || 0;
+    donorCount = (await query.get("SELECT COUNT(*) as count FROM users WHERE role = 'donor'"))?.count || 0;
+    foodCount = (await query.get("SELECT COUNT(*) as count FROM food_listings"))?.count || 0;
+    completedCount = (await query.get("SELECT COUNT(*) as count FROM requests WHERE status = 'completed'"))?.count || 0;
   } catch (e) {
     console.error('Error fetching home stats:', e);
   }
@@ -59,6 +61,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* News Coverage Carousel */}
+      <NewsCarousel />
 
       {/* Core Mission Callout */}
       <section style={{ padding: '5rem 2rem', borderBottom: '1px solid var(--border-light)', backgroundColor: '#ffffff' }}>
@@ -207,6 +212,9 @@ export default function HomePage() {
             Whether you represent a banquet hall with surplus catering or an NGO looking for support, Anna Seva provides a modern, direct, and verified platform to coordinate logistics and distribute fresh meals.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/donate" className="form-submit-btn" style={{ width: 'auto', padding: '1rem 2.5rem', borderRadius: '50px', textDecoration: 'none', margin: 0, background: 'linear-gradient(135deg, #d97706, #b45309)', boxShadow: '0 4px 16px rgba(217, 119, 6, 0.3)' }}>
+              💝 Donate Now
+            </Link>
             <Link href="/donor/register" className="form-submit-btn" style={{ width: 'auto', padding: '1rem 2.5rem', borderRadius: '50px', textDecoration: 'none', margin: 0 }}>
               Register as Donor
             </Link>

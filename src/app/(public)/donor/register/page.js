@@ -26,7 +26,14 @@ export default function DonorRegisterPage() {
     // Fetch states
     fetch('/api/states')
       .then((res) => res.json())
-      .then((data) => setStates(data))
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setStates(data);
+        } else {
+          console.error('Failed to fetch states:', data);
+          setStates([]);
+        }
+      })
       .catch(() => {});
   }, []);
 
@@ -39,7 +46,12 @@ export default function DonorRegisterPage() {
       try {
         const res = await fetch(`/api/cities?state_id=${stateId}`);
         const data = await res.json();
-        setCities(data);
+        if (Array.isArray(data)) {
+          setCities(data);
+        } else {
+          console.error('Failed to fetch cities:', data);
+          setCities([]);
+        }
       } catch (err) {
         console.error(err);
       }

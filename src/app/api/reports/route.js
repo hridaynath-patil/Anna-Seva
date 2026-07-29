@@ -21,7 +21,7 @@ export async function GET(request) {
     const endStr = `${toDate} 23:59:59`;
 
     // Fetch listings created in range
-    const listings = query.all(`
+    const listings = await query.all(`
       SELECT f.id, f.contact_person, f.food_items, f.status, f.created_at,
              s.name as state_name, c.name as city_name, u.name as donor_name
       FROM food_listings f
@@ -33,7 +33,7 @@ export async function GET(request) {
     `, [startStr, endStr]);
 
     // Fetch requests created in range
-    const requests = query.all(`
+    const requests = await query.all(`
       SELECT r.id, r.requester_name, r.quantity, r.status, r.created_at,
              fl.food_items, s.name as state_name, c.name as city_name
       FROM requests r

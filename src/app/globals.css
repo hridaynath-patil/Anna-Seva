@@ -1393,3 +1393,486 @@ h6 {
     padding: 2rem 1rem;
   }
 }
+
+/* ============================================
+   DONATION PAGE
+   ============================================ */
+
+.donate-page-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.donate-form-card {
+  max-width: 100% !important;
+  margin: 0 !important;
+  position: sticky;
+  top: 100px;
+}
+
+.donate-amount-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+}
+
+.donate-amount-btn {
+  padding: 0.75rem 0.5rem;
+  border: 2px solid var(--border-light);
+  border-radius: 12px;
+  background: var(--bg-light);
+  color: var(--primary-navy);
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.donate-amount-btn:hover {
+  border-color: var(--accent-teal);
+  background: rgba(13, 148, 136, 0.05);
+  color: var(--accent-teal-dark);
+  transform: translateY(-1px);
+}
+
+.donate-amount-btn.active {
+  background: var(--accent-teal);
+  color: white;
+  border-color: var(--accent-teal);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.3);
+  transform: translateY(-1px);
+}
+
+.donate-info-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--border-light);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.donate-info-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 1024px) {
+  .donate-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .donate-form-card {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .donate-amount-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .donate-page-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .donate-amount-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .donate-amount-btn {
+    font-size: 0.88rem;
+    padding: 0.65rem 0.35rem;
+  }
+}
+
+/* ==========================================================================
+   News Card Carousel & Lightbox Modal Styles
+   ========================================================================== */
+
+:root {
+  --carousel-gap: 24px;
+  --visible-cards: 3;
+}
+
+.news-carousel-section {
+  background-color: var(--bg-light);
+  padding: 6rem 0;
+  border-bottom: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+.news-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 0 1rem;
+}
+
+.news-section-tag {
+  color: var(--accent-teal);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.news-section-title {
+  font-size: 2.5rem;
+  font-family: var(--font-title);
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 1rem;
+}
+
+.news-section-subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Carousel Slider Components */
+.carousel-outer {
+  position: relative;
+  padding: 0 3.5rem;
+}
+
+.carousel-track-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  gap: var(--carousel-gap);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Responsive Cards with Variable Sizing */
+.news-card {
+  flex: 0 0 calc((100% - (var(--carousel-gap) * (var(--visible-cards) - 1))) / var(--visible-cards));
+  background: var(--bg-white);
+  border-radius: 16px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.news-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(13, 148, 136, 0.3);
+}
+
+/* Card Content Details */
+.news-card-image-box {
+  position: relative;
+  width: 100%;
+  padding-top: 130%; /* Tall newspaper clip ratio */
+  background-color: #f1f5f9;
+  overflow: hidden;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.news-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center; /* Start display from the top of clipping */
+  transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-card-image {
+  transform: scale(1.03);
+}
+
+.news-card-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.4);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.news-card-image-box:hover .news-card-image-overlay {
+  opacity: 1;
+}
+
+.zoom-badge {
+  background-color: var(--bg-white);
+  color: var(--primary-navy);
+  padding: 0.5rem 1.1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-md);
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+}
+
+.news-card-image-box:hover .zoom-badge {
+  transform: translateY(0);
+}
+
+.news-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.news-card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--accent-teal-dark);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.news-card-date {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.news-card-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--primary-navy);
+  margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 3.4rem;
+}
+
+.news-card-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-card-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: transparent;
+  border: 1.5px solid var(--accent-teal);
+  color: var(--accent-teal);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.news-card-btn:hover {
+  background-color: var(--accent-teal);
+  color: var(--text-white);
+}
+
+/* Navigation Arrows styling */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  color: var(--primary-navy);
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.carousel-nav-btn:hover {
+  background-color: var(--accent-teal);
+  color: var(--text-white);
+  border-color: var(--accent-teal);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
+}
+
+.carousel-nav-btn.prev {
+  left: 0;
+}
+
+.carousel-nav-btn.next {
+  right: 0;
+}
+
+/* Indicators Dots styling */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #cbd5e1;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+.carousel-dot.active {
+  background-color: var(--accent-teal);
+  width: 24px;
+  border-radius: 10px;
+}
+
+/* Lightbox overlay zoomed popup */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  animation: fadeIn 0.25s ease-out;
+  padding: 1.5rem;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 850px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lightbox-image-wrapper {
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto; /* Allow reading long newspaper columns */
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -2.75rem;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-white);
+  font-size: 2.5rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.lightbox-close:hover {
+  color: var(--accent-teal);
+}
+
+.lightbox-caption {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Carousel Media Queries */
+@media (max-width: 1024px) {
+  :root {
+    --visible-cards: 2;
+  }
+  .carousel-outer {
+    padding: 0 3rem;
+  }
+  .news-carousel-section {
+    padding: 5rem 0;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --visible-cards: 1;
+  }
+  .carousel-outer {
+    padding: 0;
+  }
+  .carousel-nav-btn {
+    display: none !important;
+  }
+  .news-carousel-section {
+    padding: 4rem 1.25rem;
+  }
+  .news-section-title {
+    font-size: 2rem;
+  }
+}
+

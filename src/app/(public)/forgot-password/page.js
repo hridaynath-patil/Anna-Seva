@@ -1,0 +1,118 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+
+export default function ForgotPasswordPage() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setMessage('');
+
+    try {
+      const res = await fetch('/api/auth/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setMessage(data.message || 'Reset link generated! Please check the server console logs.');
+        setEmail('');
+      } else {
+        setError(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="public-container animate-fade-in">
+      <div className="form-card">
+        <h1 className="form-title">Forgot Password</h1>
+        
+        <p style={{ 
+          textAlign: 'center', 
+          color: 'var(--text-muted)', 
+          marginBottom: '2rem',
+          fontSize: '0.95rem'
+        }}>
+          Enter your registered email address. We will generate a secure password reset link for your account.
+        </p>
+
+        {error && (
+          <div style={{
+            padding: '0.85rem',
+            borderRadius: '6px',
+            backgroundColor: '#fee2e2',
+            color: '#991b1b',
+            border: '1px solid #fecaca',
+            marginBottom: '1.5rem',
+            fontWeight: 500,
+            fontSize: '0.9rem',
+            textAlign: 'center'
+          }}>
+            {error}
+          </div>
+        )}
+
+        {message && (
+          <div style={{
+            padding: '0.85rem',
+            borderRadius: '6px',
+            backgroundColor: '#ecfdf5',
+            color: '#047857',
+            border: '1px solid #a7f3d0',
+            marginBottom: '1.5rem',
+            fontWeight: 500,
+            fontSize: '0.9rem',
+            textAlign: 'center'
+          }}>
+            {message}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+          <div className="form-group" style={{ marginBottom: '2rem' }}>
+            <label htmlFor="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-input"
+              required
+              placeholder="e.g. hriday@donor.com"
+              disabled={loading}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="form-submit-btn"
+            disabled={loading}
+          >
+            {loading ? 'Requesting Reset...' : 'Send Reset Link'}
+          </button>
+        </form>
+
+        <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+          Remember your password?{' '}
+          <Link href="/donor/login" style={{ color: 'var(--primary-teal)', fontWeight: 'bold', textDecoration: 'none' }}>
+            Back to Login
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+}

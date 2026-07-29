@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const revalidate = 0; // Fresh metrics on each reload
 
-export default function AdminDashboardPage() {
+export default async function AdminDashboardPage() {
   let stats = {
     states: 0,
     cities: 0,
@@ -16,14 +16,14 @@ export default function AdminDashboardPage() {
   };
 
   try {
-    stats.states = query.get("SELECT COUNT(*) as count FROM states")?.count || 0;
-    stats.cities = query.get("SELECT COUNT(*) as count FROM cities")?.count || 0;
-    stats.donors = query.get("SELECT COUNT(*) as count FROM users WHERE role = 'donor'")?.count || 0;
-    stats.listedFood = query.get("SELECT COUNT(*) as count FROM food_listings")?.count || 0;
-    stats.allRequests = query.get("SELECT COUNT(*) as count FROM requests")?.count || 0;
-    stats.newRequests = query.get("SELECT COUNT(*) as count FROM requests WHERE status = 'new'")?.count || 0;
-    stats.rejectedRequests = query.get("SELECT COUNT(*) as count FROM requests WHERE status = 'rejected'")?.count || 0;
-    stats.completedRequests = query.get("SELECT COUNT(*) as count FROM requests WHERE status = 'completed'")?.count || 0;
+    stats.states = (await query.get("SELECT COUNT(*) as count FROM states"))?.count || 0;
+    stats.cities = (await query.get("SELECT COUNT(*) as count FROM cities"))?.count || 0;
+    stats.donors = (await query.get("SELECT COUNT(*) as count FROM users WHERE role = 'donor'"))?.count || 0;
+    stats.listedFood = (await query.get("SELECT COUNT(*) as count FROM food_listings"))?.count || 0;
+    stats.allRequests = (await query.get("SELECT COUNT(*) as count FROM requests"))?.count || 0;
+    stats.newRequests = (await query.get("SELECT COUNT(*) as count FROM requests WHERE status = 'new'"))?.count || 0;
+    stats.rejectedRequests = (await query.get("SELECT COUNT(*) as count FROM requests WHERE status = 'rejected'"))?.count || 0;
+    stats.completedRequests = (await query.get("SELECT COUNT(*) as count FROM requests WHERE status = 'completed'"))?.count || 0;
   } catch (e) {
     console.error('Failed to query dashboard stats:', e);
   }

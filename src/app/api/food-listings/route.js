@@ -18,7 +18,7 @@ export async function GET(request) {
       }
 
       // Fetch donor's own listings
-      const listings = query.all(`
+      const listings = await query.all(`
         SELECT f.*, s.name as state_name, c.name as city_name 
         FROM food_listings f
         JOIN states s ON f.state_id = s.id
@@ -71,7 +71,7 @@ export async function GET(request) {
 
     sql += ' ORDER BY f.created_at DESC';
 
-    const listings = query.all(sql, params);
+    const listings = await query.all(sql, params);
     return Response.json(listings);
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
@@ -91,7 +91,7 @@ export async function POST(request) {
       return Response.json({ error: 'All fields except description are required' }, { status: 400 });
     }
 
-    const result = query.run(`
+    const result = await query.run(`
       INSERT INTO food_listings (donor_id, contact_person, mobile, food_items, description, address, state_id, city_id, status)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'available')
     `, [session.id, contact_person, mobile, food_items, description || null, address, state_id, city_id]);
@@ -116,7 +116,7 @@ export async function PUT(request) {
     }
 
     // Check ownership if not admin
-    const listing = query.get('SELECT * FROM food_listings WHERE id = ?', [id]);
+    const listing = await query.get('SELECT * FROM food_listings WHERE id = ?', [id]);
     if (!listing) {
       return Response.json({ error: 'Listing not found' }, { status: 404 });
     }
@@ -127,14 +127,14 @@ export async function PUT(request) {
 
     if (food_items || contact_person || mobile) {
       // General edit (can also update status if provided)
-      query.run(`
+      await query.run(`
         UPDATE food_listings 
         SET contact_person = ?, mobile = ?, food_items = ?, description = ?, address = ?, state_id = ?, city_id = ?, status = ?
         WHERE id = ?
       `, [contact_person, mobile, food_items, description || null, address, state_id, city_id, status || listing.status, id]);
     } else if (status) {
       // Status-only update
-      query.run('UPDATE food_listings SET status = ? WHERE id = ?', [status, id]);
+      await query.run('UPDATE food_listings SET status = ? WHERE id = ?', [status, id]);
     } else {
       return Response.json({ error: 'No fields to update' }, { status: 400 });
     }
@@ -159,7 +159,7 @@ export async function DELETE(request) {
       return Response.json({ error: 'Listing ID is required' }, { status: 400 });
     }
 
-    const listing = query.get('SELECT * FROM food_listings WHERE id = ?', [id]);
+    const listing = await query.get('SELECT * FROM food_listings WHERE id = ?', [id]);
     if (!listing) {
       return Response.json({ error: 'Listing not found' }, { status: 404 });
     }
@@ -168,7 +168,7 @@ export async function DELETE(request) {
       return Response.json({ error: 'Unauthorized to delete this listing' }, { status: 403 });
     }
 
-    query.run('DELETE FROM food_listings WHERE id = ?', [id]);
+    await query.run('DELETE FROM food_listings WHERE id = ?', [id]);
     return Response.json({ success: true });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });

@@ -8,7 +8,7 @@ export async function GET() {
       return Response.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
-    const donors = query.all(`
+    const donors = await query.all(`
       SELECT u.id, u.name, u.email, u.mobile, u.address, s.name as state_name, c.name as city_name, u.status, u.created_at
       FROM users u
       LEFT JOIN states s ON u.state_id = s.id
@@ -40,7 +40,7 @@ export async function PUT(request) {
       return Response.json({ error: 'Invalid status' }, { status: 400 });
     }
 
-    const result = query.run("UPDATE users SET status = ? WHERE id = ? AND role = 'donor'", [status, id]);
+    const result = await query.run("UPDATE users SET status = ? WHERE id = ? AND role = 'donor'", [status, id]);
 
     if (result.changes === 0) {
       return Response.json({ error: 'Donor not found' }, { status: 404 });
@@ -68,7 +68,7 @@ export async function DELETE(request) {
 
     // SQLite will cascade delete listings and requests if configured,
     // which our tables are!
-    query.run("DELETE FROM users WHERE id = ? AND role = 'donor'", [id]);
+    await query.run("DELETE FROM users WHERE id = ? AND role = 'donor'", [id]);
     return Response.json({ success: true });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });

@@ -17,47 +17,47 @@ export default async function DonorDashboardPage() {
   };
 
   try {
-    stats.totalListings = query.get(
+    stats.totalListings = (await query.get(
       "SELECT COUNT(*) as count FROM food_listings WHERE donor_id = ?",
       [session.id]
-    )?.count || 0;
+    ))?.count || 0;
 
-    stats.activeListings = query.get(
+    stats.activeListings = (await query.get(
       "SELECT COUNT(*) as count FROM food_listings WHERE donor_id = ? AND status = 'available'",
       [session.id]
-    )?.count || 0;
+    ))?.count || 0;
 
-    stats.totalRequests = query.get(
+    stats.totalRequests = (await query.get(
       `SELECT COUNT(*) as count 
        FROM requests r 
        JOIN food_listings fl ON r.listing_id = fl.id 
        WHERE fl.donor_id = ?`,
       [session.id]
-    )?.count || 0;
+    ))?.count || 0;
 
-    stats.newRequests = query.get(
+    stats.newRequests = (await query.get(
       `SELECT COUNT(*) as count 
        FROM requests r 
        JOIN food_listings fl ON r.listing_id = fl.id 
        WHERE fl.donor_id = ? AND r.status = 'new'`,
       [session.id]
-    )?.count || 0;
+    ))?.count || 0;
 
-    stats.approvedRequests = query.get(
+    stats.approvedRequests = (await query.get(
       `SELECT COUNT(*) as count 
        FROM requests r 
        JOIN food_listings fl ON r.listing_id = fl.id 
        WHERE fl.donor_id = ? AND r.status = 'approved'`,
       [session.id]
-    )?.count || 0;
+    ))?.count || 0;
 
-    stats.completedRequests = query.get(
+    stats.completedRequests = (await query.get(
       `SELECT COUNT(*) as count 
        FROM requests r 
        JOIN food_listings fl ON r.listing_id = fl.id 
        WHERE fl.donor_id = ? AND r.status = 'completed'`,
       [session.id]
-    )?.count || 0;
+    ))?.count || 0;
   } catch (e) {
     console.error('Failed to query donor dashboard stats:', e);
   }

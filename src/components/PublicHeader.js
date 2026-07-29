@@ -30,6 +30,7 @@ export default function PublicHeader() {
     { label: 'HOME', path: '/' },
     { label: 'ABOUT', path: '/about' },
     { label: 'AVAILABLE FOOD LIST', path: '/available-food' },
+    { label: 'DONATE', path: '/donate' },
     { label: 'CONTACT', path: '/contact' }
   ];
 
