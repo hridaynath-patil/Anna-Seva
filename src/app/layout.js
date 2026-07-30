@@ -1,4 +1,5 @@
 import './globals.css';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 export const metadata = {
   title: 'अन्न सेवा (Anna Seva) - Feed Needy, Reduce Waste',
@@ -8,7 +9,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   );
 }
+

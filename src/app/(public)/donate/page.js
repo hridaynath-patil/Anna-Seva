@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 const PRESET_AMOUNTS = [500, 1000, 2100, 5000, 11000, 21000, 51000];
 
 export default function DonatePage() {
+  const { t } = useLanguage();
   const [amount, setAmount] = useState('');
   const [customAmount, setCustomAmount] = useState('');
   const [donorInfo, setDonorInfo] = useState({
@@ -189,14 +191,14 @@ export default function DonatePage() {
               letterSpacing: '1.5px',
               border: '1.5px solid rgba(13, 148, 136, 0.2)'
             }}>
-              TAX EXEMPT UNDER SECTION 80G
+              {t('donate.tax_badge', 'TAX EXEMPT UNDER SECTION 80G')}
             </span>
           </div>
           <h1 style={{ fontSize: '2.8rem', marginBottom: '1rem' }}>
-            Donate Now & Make a Difference
+            {t('donate.hero_title', 'Donate Now & Make a Difference')}
           </h1>
           <p style={{ fontSize: '1.1rem', maxWidth: '650px', margin: '0 auto' }}>
-            Your generous contribution helps us feed the hungry and reduce food waste across Maharashtra. Every rupee counts.
+            {t('donate.hero_desc', 'Your generous contribution helps us feed the hungry and reduce food waste across Maharashtra. Every rupee counts.')}
           </p>
         </div>
       </section>
@@ -209,7 +211,7 @@ export default function DonatePage() {
           {/* LEFT: Donation Form */}
           <div className="form-card donate-form-card">
             <h2 className="form-title" style={{ textAlign: 'left', fontSize: '1.6rem', marginBottom: '1.75rem' }}>
-              💝 Make a Donation
+              {t('donate.card_title', '💝 Make a Donation')}
             </h2>
 
             {status.message && (
@@ -231,7 +233,7 @@ export default function DonatePage() {
               {/* Amount Selection */}
               <div style={{ marginBottom: '1.75rem' }}>
                 <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.75rem', fontSize: '0.9rem', color: 'var(--primary-navy-light)' }}>
-                  Select Amount (₹)
+                  {t('donate.select_amount', 'Select Amount (₹)')}
                 </label>
                 <div className="donate-amount-grid">
                   {PRESET_AMOUNTS.map((val) => (
@@ -247,7 +249,7 @@ export default function DonatePage() {
                 </div>
                 <div style={{ marginTop: '1rem' }}>
                   <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                    Or enter a custom amount
+                    {t('donate.custom_amount_label', 'Or enter a custom amount')}
                   </label>
                   <div style={{ position: 'relative' }}>
                     <span style={{
@@ -265,7 +267,7 @@ export default function DonatePage() {
                       value={customAmount}
                       onChange={handleCustomAmountChange}
                       className="form-input"
-                      placeholder="Enter amount"
+                      placeholder={t('donate.custom_amount_placeholder', 'Enter amount')}
                       min="1"
                       style={{ paddingLeft: '2.25rem', fontSize: '1.05rem', fontWeight: 600 }}
                     />
@@ -276,7 +278,7 @@ export default function DonatePage() {
               {/* Donor Info */}
               <div className="responsive-grid-2col" style={{ marginBottom: '0.25rem' }}>
                 <div className="form-group">
-                  <label htmlFor="donate-name">Full Name *</label>
+                  <label htmlFor="donate-name">{t('donate.name_label', 'Full Name *')}</label>
                   <input
                     type="text"
                     id="donate-name"
@@ -285,11 +287,11 @@ export default function DonatePage() {
                     onChange={handleInfoChange}
                     className="form-input"
                     required
-                    placeholder="Enter your full name"
+                    placeholder={t('donate.name_placeholder', 'Enter your full name')}
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="donate-email">Email Address *</label>
+                  <label htmlFor="donate-email">{t('donate.email_label', 'Email Address *')}</label>
                   <input
                     type="email"
                     id="donate-email"
@@ -298,13 +300,13 @@ export default function DonatePage() {
                     onChange={handleInfoChange}
                     className="form-input"
                     required
-                    placeholder="your@email.com"
+                    placeholder={t('donate.email_placeholder', 'your@email.com')}
                   />
                 </div>
               </div>
               <div className="responsive-grid-2col" style={{ marginBottom: '0.25rem' }}>
                 <div className="form-group">
-                  <label htmlFor="donate-mobile">Mobile Number *</label>
+                  <label htmlFor="donate-mobile">{t('donate.mobile_label', 'Mobile Number *')}</label>
                   <input
                     type="tel"
                     id="donate-mobile"
@@ -313,12 +315,12 @@ export default function DonatePage() {
                     onChange={handleInfoChange}
                     className="form-input"
                     required
-                    placeholder="10-digit mobile"
+                    placeholder={t('donate.mobile_placeholder', '10-digit mobile')}
                     pattern="[0-9]{10}"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="donate-pan">PAN Number <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 400 }}>(for 80G receipt)</span></label>
+                  <label htmlFor="donate-pan">{t('donate.pan_label', 'PAN Number')} <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 400 }}>{t('donate.pan_sub', '(for 80G receipt)')}</span></label>
                   <input
                     type="text"
                     id="donate-pan"
@@ -326,7 +328,7 @@ export default function DonatePage() {
                     value={donorInfo.pan}
                     onChange={handleInfoChange}
                     className="form-input"
-                    placeholder="ABCDE1234F"
+                    placeholder={t('donate.pan_placeholder', 'ABCDE1234F')}
                     maxLength="10"
                     style={{ textTransform: 'uppercase' }}
                   />
@@ -345,7 +347,7 @@ export default function DonatePage() {
                   justifyContent: 'space-between',
                   alignItems: 'center'
                 }}>
-                  <span style={{ fontWeight: 600, color: 'var(--text-muted)', fontSize: '0.92rem' }}>Donation Amount</span>
+                  <span style={{ fontWeight: 600, color: 'var(--text-muted)', fontSize: '0.92rem' }}>{t('donate.summary_label', 'Donation Amount')}</span>
                   <span style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--accent-teal-dark)', fontFamily: 'var(--font-title)' }}>
                     ₹{selectedAmount.toLocaleString('en-IN')}
                   </span>
@@ -366,11 +368,11 @@ export default function DonatePage() {
                   gap: '0.5rem'
                 }}
               >
-                {loading ? 'Processing...' : '🙏 Donate with Razorpay'}
+                {loading ? t('donate.processing', 'Processing...') : t('donate.submit_btn', '🙏 Donate with Razorpay')}
               </button>
 
               <p style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.75rem' }}>
-                Secured by Razorpay · UPI, Cards, Net Banking accepted
+                {t('donate.razorpay_note', 'Secured by Razorpay · UPI, Cards, Net Banking accepted')}
               </p>
             </form>
           </div>
@@ -393,38 +395,38 @@ export default function DonatePage() {
                 marginBottom: '1.25rem',
                 fontWeight: 800
               }}>🏛️</div>
-              <h3 style={{ fontSize: '1.15rem', marginBottom: '1.25rem', color: 'var(--primary-navy)' }}>Trust Details</h3>
+              <h3 style={{ fontSize: '1.15rem', marginBottom: '1.25rem', color: 'var(--primary-navy)' }}>{t('donate.trust_card_title', 'Trust Details')}</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', fontSize: '0.9rem' }}>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Name of Trust</span>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.trust_name_label', 'Name of Trust')}</span>
                   <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem' }}>
-                    SHRI VISHWANATHRAO SHAMRAO PATIL CHARITABLE TRUST
+                    {t('donate.trust_name_val', 'SHRI VISHWANATHRAO SHAMRAO PATIL CHARITABLE TRUST')}
                   </div>
                 </div>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Address</span>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.trust_address_label', 'Address')}</span>
                   <div style={{ fontWeight: 600, color: 'var(--text-main)', marginTop: '0.15rem' }}>
-                    Hridaynath Bhagwat Patil, A1 Matoshree Empire, Latur
+                    {t('donate.trust_address_val', 'Hridaynath Bhagwat Patil, A1 Matoshree Empire, Latur')}
                   </div>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                   <div>
-                    <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>PAN</span>
+                    <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.pan_code_label', 'PAN')}</span>
                     <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontFamily: 'monospace', letterSpacing: '1px' }}>
                       ABMTS3026R
                     </div>
                   </div>
                   <div>
-                    <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>80G URN</span>
+                    <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.urn_code_label', '80G URN')}</span>
                     <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontFamily: 'monospace', fontSize: '0.8rem', letterSpacing: '0.5px' }}>
                       ABMTS3026RF20251
                     </div>
                   </div>
                 </div>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Approval Valid</span>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.validity_label', 'Approval Valid')}</span>
                   <div style={{ fontWeight: 600, color: 'var(--text-main)', marginTop: '0.15rem' }}>
-                    AY 2026-27 to AY 2028-2029
+                    {t('donate.validity_val', 'AY 2026-27 to AY 2028-2029')}
                   </div>
                 </div>
               </div>
@@ -458,23 +460,23 @@ export default function DonatePage() {
                   marginBottom: '1.25rem',
                   fontWeight: 800
                 }}>🏦</div>
-                <h3 style={{ fontSize: '1.15rem', marginBottom: '1.25rem', color: 'var(--primary-navy)' }}>Bank Transfer Details</h3>
+                <h3 style={{ fontSize: '1.15rem', marginBottom: '1.25rem', color: 'var(--primary-navy)' }}>{t('donate.bank_card_title', 'Bank Transfer Details')}</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', fontSize: '0.9rem' }}>
                   <div>
-                    <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Account Name</span>
+                    <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.acc_name_label', 'Account Name')}</span>
                     <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontSize: '0.85rem' }}>
-                      SHRI VISHWANATHRAO SHAMRAO PATIL CH. TRUST
+                      {t('donate.acc_name_val', 'SHRI VISHWANATHRAO SHAMRAO PATIL CH. TRUST')}
                     </div>
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                     <div>
-                      <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Account No.</span>
+                      <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.acc_no_label', 'Account No.')}</span>
                       <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontFamily: 'monospace', letterSpacing: '1px' }}>
                         000100780002245
                       </div>
                     </div>
                     <div>
-                      <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>IFSC Code</span>
+                      <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.ifsc_label', 'IFSC Code')}</span>
                       <div style={{ fontWeight: 700, color: 'var(--primary-navy)', marginTop: '0.15rem', fontFamily: 'monospace', letterSpacing: '1px' }}>
                         HDFC0YNSBL
                       </div>
@@ -483,7 +485,7 @@ export default function DonatePage() {
                 </div>
               </div>
 
-              {/* PhonePe QR code in top right (or stacked on mobile) */}
+              {/* PhonePe QR code */}
               <div className="qr-container-absolute" style={{
                 position: 'absolute',
                 top: '1.5rem',
@@ -510,7 +512,9 @@ export default function DonatePage() {
                     backgroundColor: 'white'
                   }}
                 />
-                <span style={{ fontSize: '0.65rem', fontWeight: 800, color: '#475569', letterSpacing: '0.3px' }}>Scan with PhonePe</span>
+                <span style={{ fontSize: '0.65rem', fontWeight: 800, color: '#475569', letterSpacing: '0.3px' }}>
+                  {t('donate.qr_scan_label', 'Scan with PhonePe')}
+                </span>
               </div>
 
               <div style={{
@@ -524,7 +528,7 @@ export default function DonatePage() {
                 fontWeight: 500,
                 lineHeight: 1.5
               }}>
-                ℹ️ For bank transfers, please email the transaction receipt to <strong>vspatil.charitabletrust@gmail.com</strong> to receive your 80G certificate.
+                {t('donate.bank_transfer_note', 'ℹ️ For bank transfers, please email the transaction receipt to vspatil.charitabletrust@gmail.com to receive your 80G certificate.')}
               </div>
             </div>
 
@@ -547,26 +551,26 @@ export default function DonatePage() {
                 background: 'rgba(13, 148, 136, 0.15)'
               }}></div>
               <h4 style={{ color: '#ffffff', fontSize: '1.1rem', marginBottom: '0.85rem', fontWeight: 700 }}>
-                🧾 80G Tax Deduction
+                {t('donate.tax_box_title', '🧾 80G Tax Deduction')}
               </h4>
               <p style={{ fontSize: '0.88rem', lineHeight: 1.65, opacity: 0.85, marginBottom: '0.75rem' }}>
-                This donation is eligible for deduction under <strong>Section 80G</strong> of the Income-tax Act, 1961.
+                {t('donate.tax_box_desc', 'This donation is eligible for deduction under Section 80G of the Income-tax Act, 1961.')}
               </p>
               <ul style={{ fontSize: '0.82rem', lineHeight: 1.7, opacity: 0.75, paddingLeft: '1.25rem', margin: 0 }}>
-                <li>Legal compliance ref: 12-Sub-clause (A) of clause (iv) of first proviso to section 80G(5)</li>
-                <li>Approved by the Principal Commissioner of Income Tax</li>
+                <li>{t('donate.tax_point_1', 'Legal compliance ref: 12-Sub-clause (A) of clause (iv) of first proviso to section 80G(5)')}</li>
+                <li>{t('donate.tax_point_2', 'Approved by the Principal Commissioner of Income Tax')}</li>
               </ul>
             </div>
 
             {/* Steps */}
             <div className="donate-info-card" style={{ padding: '1.5rem' }}>
-              <h4 style={{ fontSize: '1rem', marginBottom: '1rem', color: 'var(--primary-navy)' }}>How It Works</h4>
+              <h4 style={{ fontSize: '1rem', marginBottom: '1rem', color: 'var(--primary-navy)' }}>{t('donate.how_title', 'How It Works')}</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {[
-                  { icon: '💰', label: 'Select or enter your donation amount' },
-                  { icon: '📝', label: 'Fill in your details for the 80G receipt' },
-                  { icon: '💳', label: 'Pay securely via Razorpay (UPI/Card/NetBanking)' },
-                  { icon: '📄', label: 'Receive your donation receipt & 80G certificate' }
+                  { icon: '💰', label: t('donate.step_1', 'Select or enter your donation amount') },
+                  { icon: '📝', label: t('donate.step_2', 'Fill in your details for the 80G receipt') },
+                  { icon: '💳', label: t('donate.step_3', 'Pay securely via Razorpay (UPI/Card/NetBanking)') },
+                  { icon: '📄', label: t('donate.step_4', 'Receive your donation receipt & 80G certificate') }
                 ].map((step, i) => (
                   <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', fontSize: '0.88rem' }}>
                     <span style={{
@@ -603,8 +607,12 @@ export default function DonatePage() {
             }}>
               <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>✅</div>
-                <h3 style={{ fontSize: '1.5rem', color: 'var(--accent-teal-dark)', marginBottom: '0.5rem' }}>Donation Successful!</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>Thank you for your generosity, {paymentDetails.name}.</p>
+                <h3 style={{ fontSize: '1.5rem', color: 'var(--accent-teal-dark)', marginBottom: '0.5rem' }}>
+                  {t('donate.receipt_success_title', 'Donation Successful!')}
+                </h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
+                  {t('donate.receipt_thank', 'Thank you for your generosity,')} {paymentDetails.name}.
+                </p>
               </div>
 
               <div style={{
@@ -618,29 +626,29 @@ export default function DonatePage() {
                 marginBottom: '1.5rem'
               }}>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Amount</span>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.receipt_amount', 'Amount')}</span>
                   <div style={{ fontWeight: 800, fontSize: '1.5rem', color: 'var(--accent-teal-dark)', fontFamily: 'var(--font-title)' }}>
                     ₹{paymentDetails.amount.toLocaleString('en-IN')}
                   </div>
                 </div>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Date</span>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.receipt_date', 'Date')}</span>
                   <div style={{ fontWeight: 600, color: 'var(--text-main)' }}>{paymentDetails.date}</div>
                 </div>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Payment ID</span>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.receipt_payment_id', 'Payment ID')}</span>
                   <div style={{ fontWeight: 600, color: 'var(--text-main)', fontFamily: 'monospace', fontSize: '0.82rem' }}>{paymentDetails.paymentId}</div>
                 </div>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Order ID</span>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.receipt_order_id', 'Order ID')}</span>
                   <div style={{ fontWeight: 600, color: 'var(--text-main)', fontFamily: 'monospace', fontSize: '0.82rem' }}>{paymentDetails.orderId}</div>
                 </div>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Name</span>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.name_label', 'Full Name *').replace('*', '').trim()}</span>
                   <div style={{ fontWeight: 600, color: 'var(--text-main)' }}>{paymentDetails.name}</div>
                 </div>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Email</span>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{t('donate.email_label', 'Email Address *').replace('*', '').trim()}</span>
                   <div style={{ fontWeight: 600, color: 'var(--text-main)' }}>{paymentDetails.email}</div>
                 </div>
               </div>
@@ -654,7 +662,7 @@ export default function DonatePage() {
               }}>
                 <strong>Shri Vishwanathrao Shamrao Patil Charitable Trust, Latur</strong><br />
                 PAN: ABMTS3026R &nbsp;|&nbsp; 80G URN: ABMTS3026RF20251<br />
-                A formal 80G receipt will be sent to your email.
+                {t('donate.receipt_footer_note', 'A formal 80G receipt will be sent to your email.')}
               </div>
             </div>
           </div>

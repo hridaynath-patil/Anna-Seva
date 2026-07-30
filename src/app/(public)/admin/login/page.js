@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function AdminLoginPage() {
+  const { t } = useLanguage();
   const router = useRouter();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
@@ -45,7 +47,9 @@ export default function AdminLoginPage() {
   return (
     <div className="public-container animate-fade-in">
       <div className="form-card" style={{ borderTop: '4px solid var(--admin-sidebar-bg)' }}>
-        <h1 className="form-title" style={{ color: 'var(--admin-sidebar-bg)' }}>Admin Portal</h1>
+        <h1 className="form-title" style={{ color: 'var(--admin-sidebar-bg)' }}>
+          {t('admin_auth.login_title', 'Admin Portal')}
+        </h1>
         
         {error && (
           <div style={{
@@ -65,7 +69,7 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Admin Email</label>
+            <label htmlFor="email">{t('admin_auth.email_label', 'Admin Email')}</label>
             <input
               type="email"
               id="email"
@@ -73,12 +77,12 @@ export default function AdminLoginPage() {
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="form-input"
               required
-              placeholder="e.g. admin@annaseva.org"
+              placeholder={t('admin_auth.email_placeholder', 'e.g. admin@annaseva.org')}
             />
           </div>
 
           <div className="form-group" style={{ marginBottom: '1.75rem' }}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t('admin_auth.password_label', 'Password')}</label>
             <div style={{ position: 'relative' }}>
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -88,7 +92,7 @@ export default function AdminLoginPage() {
                 className="form-input"
                 style={{ paddingRight: '3rem' }}
                 required
-                placeholder="Enter password"
+                placeholder={t('admin_auth.password_placeholder', 'Enter password')}
               />
               <button
                 type="button"
@@ -109,7 +113,7 @@ export default function AdminLoginPage() {
                   padding: '0.25rem'
                 }}
               >
-                {showPassword ? 'Hide' : 'Show'}
+                {showPassword ? t('donor_auth.hide', 'Hide') : t('donor_auth.show', 'Show')}
               </button>
             </div>
           </div>
@@ -120,7 +124,7 @@ export default function AdminLoginPage() {
             style={{ backgroundColor: 'var(--admin-sidebar-bg)' }}
             disabled={loading}
           >
-            {loading ? 'Authenticating...' : 'Access Dashboard'}
+            {loading ? t('admin_auth.authenticating', 'Authenticating...') : t('admin_auth.access_btn', 'Access Dashboard')}
           </button>
         </form>
       </div>

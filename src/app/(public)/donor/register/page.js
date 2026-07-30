@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function DonorRegisterPage() {
+  const { t } = useLanguage();
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
@@ -23,7 +25,6 @@ export default function DonorRegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    // Fetch states
     fetch('/api/states')
       .then((res) => res.json())
       .then((data) => {
@@ -117,16 +118,16 @@ export default function DonorRegisterPage() {
           }}>
             ✓
           </div>
-          <h1 className="form-title" style={{ marginBottom: '1rem' }}>Registration Submitted!</h1>
+          <h1 className="form-title" style={{ marginBottom: '1rem' }}>
+            {t('donor_auth.reg_submitted_title', 'Registration Submitted!')}
+          </h1>
           <p style={{
             fontSize: '1.05rem',
             color: 'var(--text-light)',
             lineHeight: '1.6',
             marginBottom: '2rem'
           }}>
-            Thank you for registering as a food donor with <strong>Anna Seva (अन्न सेवा)</strong>. 
-            Your registration has been submitted for administrator approval. 
-            Once approved, you will receive confirmation and will be able to log in to post food listings.
+            {t('donor_auth.reg_submitted_desc', 'Thank you for registering as a food donor with Anna Seva (अन्न सेवा). Your registration has been submitted for administrator approval. Once approved, you will receive confirmation and will be able to log in to post food listings.')}
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
             <Link href="/" className="form-submit-btn" style={{
@@ -142,7 +143,7 @@ export default function DonorRegisterPage() {
               transition: 'all 0.2s',
               textAlign: 'center'
             }}>
-              Go to Home
+              {t('donor_auth.go_home', 'Go to Home')}
             </Link>
             <Link href="/donor/login" className="form-submit-btn" style={{
               textDecoration: 'none',
@@ -153,7 +154,7 @@ export default function DonorRegisterPage() {
               borderRadius: '6px',
               textAlign: 'center'
             }}>
-              Login Page
+              {t('donor_auth.go_login', 'Login Page')}
             </Link>
           </div>
         </div>
@@ -164,7 +165,7 @@ export default function DonorRegisterPage() {
   return (
     <div className="public-container animate-fade-in">
       <div className="form-card" style={{ maxWidth: '650px' }}>
-        <h1 className="form-title">Donor Registration</h1>
+        <h1 className="form-title">{t('donor_auth.register_title', 'Donor Registration')}</h1>
 
         {error && (
           <div style={{
@@ -185,7 +186,7 @@ export default function DonorRegisterPage() {
         <form onSubmit={handleSubmit}>
           <div className="responsive-grid-2col">
             <div className="form-group">
-              <label htmlFor="name">Full Name</label>
+              <label htmlFor="name">{t('donor_auth.name_label', 'Full Name')}</label>
               <input
                 type="text"
                 id="name"
@@ -194,11 +195,11 @@ export default function DonorRegisterPage() {
                 onChange={handleChange}
                 className="form-input"
                 required
-                placeholder="Enter name"
+                placeholder={t('donor_auth.name_placeholder', 'Enter name')}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="email">Email Address</label>
+              <label htmlFor="email">{t('donor_auth.email_label', 'Email Address')}</label>
               <input
                 type="email"
                 id="email"
@@ -207,14 +208,14 @@ export default function DonorRegisterPage() {
                 onChange={handleChange}
                 className="form-input"
                 required
-                placeholder="e.g. patil@donor.com"
+                placeholder={t('donor_auth.email_placeholder', 'e.g. patil@donor.com')}
               />
             </div>
           </div>
 
           <div className="responsive-grid-2col">
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">{t('donor_auth.password_label', 'Password')}</label>
               <div style={{ position: 'relative' }}>
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -225,7 +226,7 @@ export default function DonorRegisterPage() {
                   className="form-input"
                   style={{ paddingRight: '3rem' }}
                   required
-                  placeholder="Enter password"
+                  placeholder={t('donor_auth.password_placeholder', 'Enter password')}
                 />
                 <button
                   type="button"
@@ -246,12 +247,12 @@ export default function DonorRegisterPage() {
                     padding: '0.25rem'
                   }}
                 >
-                  {showPassword ? 'Hide' : 'Show'}
+                  {showPassword ? t('donor_auth.hide', 'Hide') : t('donor_auth.show', 'Show')}
                 </button>
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="mobile">Mobile Number</label>
+              <label htmlFor="mobile">{t('donor_auth.mobile_label', 'Mobile Number')}</label>
               <input
                 type="tel"
                 id="mobile"
@@ -260,7 +261,7 @@ export default function DonorRegisterPage() {
                 onChange={handleChange}
                 className="form-input"
                 required
-                placeholder="10-digit mobile"
+                placeholder={t('donor_auth.mobile_placeholder', '10-digit mobile')}
                 pattern="[0-9]{10}"
               />
             </div>
@@ -268,7 +269,7 @@ export default function DonorRegisterPage() {
 
           <div className="responsive-grid-2col">
             <div className="form-group">
-              <label htmlFor="state_id">State</label>
+              <label htmlFor="state_id">{t('donor_auth.state_label', 'State')}</label>
               <select
                 id="state_id"
                 name="state_id"
@@ -277,14 +278,14 @@ export default function DonorRegisterPage() {
                 className="form-select"
                 required
               >
-                <option value="">Select State</option>
+                <option value="">{t('donor_auth.select_state', 'Select State')}</option>
                 {states.map((s) => (
                   <option key={s.id} value={s.id}>{s.name}</option>
                 ))}
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="city_id">City</label>
+              <label htmlFor="city_id">{t('donor_auth.city_label', 'City')}</label>
               <select
                 id="city_id"
                 name="city_id"
@@ -294,7 +295,7 @@ export default function DonorRegisterPage() {
                 required
                 disabled={!formData.state_id}
               >
-                <option value="">Select City</option>
+                <option value="">{t('donor_auth.select_city', 'Select City')}</option>
                 {cities.map((c) => (
                   <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
@@ -303,7 +304,7 @@ export default function DonorRegisterPage() {
           </div>
 
           <div className="form-group" style={{ marginBottom: '1.75rem' }}>
-            <label htmlFor="address">Address</label>
+            <label htmlFor="address">{t('donor_auth.address_label', 'Address')}</label>
             <input
               type="text"
               id="address"
@@ -312,7 +313,7 @@ export default function DonorRegisterPage() {
               onChange={handleChange}
               className="form-input"
               required
-              placeholder="e.g. b755 kolhapur"
+              placeholder={t('donor_auth.address_placeholder', 'e.g. b755 kolhapur')}
             />
           </div>
 
@@ -321,14 +322,14 @@ export default function DonorRegisterPage() {
             className="form-submit-btn"
             disabled={loading}
           >
-            {loading ? 'Submitting...' : 'Sent for Approval for Registration'}
+            {loading ? t('donor_auth.submitting', 'Submitting...') : t('donor_auth.register_btn', 'Sent for Approval for Registration')}
           </button>
         </form>
 
         <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-          Already have an account?{' '}
+          {t('donor_auth.already_account', 'Already have an account?')}{' '}
           <Link href="/donor/login" style={{ color: 'var(--primary-teal)', fontWeight: 'bold', textDecoration: 'none' }}>
-            Login here
+            {t('donor_auth.login_btn', 'Login here')}
           </Link>
         </p>
       </div>

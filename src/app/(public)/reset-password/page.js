@@ -3,8 +3,10 @@
 import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 function ResetPasswordForm() {
+  const { t } = useLanguage();
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
@@ -66,7 +68,7 @@ function ResetPasswordForm() {
   if (!token) {
     return (
       <div className="form-card">
-        <h1 className="form-title">Invalid Reset Link</h1>
+        <h1 className="form-title">{t('password_reset.invalid_link_title', 'Invalid Reset Link')}</h1>
         <div style={{
           padding: '0.85rem',
           borderRadius: '6px',
@@ -78,11 +80,11 @@ function ResetPasswordForm() {
           fontSize: '0.9rem',
           textAlign: 'center'
         }}>
-          No reset token was found in the link. Please request a new password reset link.
+          {t('password_reset.invalid_link_desc', 'No reset token was found in the link. Please request a new password reset link.')}
         </div>
         <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.9rem' }}>
           <Link href="/forgot-password" style={{ color: 'var(--primary-teal)', fontWeight: 'bold', textDecoration: 'none' }}>
-            Request New Link
+            {t('password_reset.request_new_link', 'Request New Link')}
           </Link>
         </p>
       </div>
@@ -91,7 +93,7 @@ function ResetPasswordForm() {
 
   return (
     <div className="form-card">
-      <h1 className="form-title">Reset Password</h1>
+      <h1 className="form-title">{t('password_reset.reset_title', 'Reset Password')}</h1>
       
       <p style={{ 
         textAlign: 'center', 
@@ -99,7 +101,7 @@ function ResetPasswordForm() {
         marginBottom: '2rem',
         fontSize: '0.95rem'
       }}>
-        Please enter your new password below.
+        {t('password_reset.reset_desc', 'Please enter your new password below.')}
       </p>
 
       {error && (
@@ -136,7 +138,7 @@ function ResetPasswordForm() {
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="password">New Password</label>
+          <label htmlFor="password">{t('password_reset.new_password_label', 'New Password')}</label>
           <div style={{ position: 'relative' }}>
             <input
               type={showPassword ? 'text' : 'password'}
@@ -146,7 +148,7 @@ function ResetPasswordForm() {
               className="form-input"
               style={{ paddingRight: '3rem' }}
               required
-              placeholder="Min 6 characters"
+              placeholder={t('password_reset.new_password_placeholder', 'Min 6 characters')}
               disabled={loading}
             />
             <button
@@ -166,13 +168,13 @@ function ResetPasswordForm() {
                 padding: '0.25rem'
               }}
             >
-              {showPassword ? 'Hide' : 'Show'}
+              {showPassword ? t('donor_auth.hide', 'Hide') : t('donor_auth.show', 'Show')}
             </button>
           </div>
         </div>
 
         <div className="form-group" style={{ marginBottom: '2rem' }}>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">{t('password_reset.confirm_password_label', 'Confirm Password')}</label>
           <input
             type={showPassword ? 'text' : 'password'}
             id="confirmPassword"
@@ -180,7 +182,7 @@ function ResetPasswordForm() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="form-input"
             required
-            placeholder="Confirm your password"
+            placeholder={t('password_reset.confirm_password_placeholder', 'Confirm your password')}
             disabled={loading}
           />
         </div>
@@ -190,7 +192,7 @@ function ResetPasswordForm() {
           className="form-submit-btn"
           disabled={loading}
         >
-          {loading ? 'Updating Password...' : 'Reset Password'}
+          {loading ? t('password_reset.updating', 'Updating Password...') : t('password_reset.reset_btn', 'Reset Password')}
         </button>
       </form>
     </div>

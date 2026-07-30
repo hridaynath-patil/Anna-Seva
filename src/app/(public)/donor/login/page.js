@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function DonorLoginPage() {
+  const { t } = useLanguage();
   const router = useRouter();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
@@ -41,7 +43,7 @@ export default function DonorLoginPage() {
   return (
     <div className="public-container animate-fade-in">
       <div className="form-card">
-        <h1 className="form-title">Donor Login</h1>
+        <h1 className="form-title">{t('donor_auth.login_title', 'Donor Login')}</h1>
         
         {error && (
           <div style={{
@@ -61,7 +63,7 @@ export default function DonorLoginPage() {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">{t('donor_auth.email_label', 'Email Address')}</label>
             <input
               type="email"
               id="email"
@@ -69,12 +71,12 @@ export default function DonorLoginPage() {
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="form-input"
               required
-              placeholder="e.g. patil@donor.com"
+              placeholder={t('donor_auth.email_placeholder', 'e.g. patil@donor.com')}
             />
           </div>
 
           <div className="form-group" style={{ marginBottom: '0.5rem' }}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t('donor_auth.password_label', 'Password')}</label>
             <div style={{ position: 'relative' }}>
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -84,7 +86,7 @@ export default function DonorLoginPage() {
                 className="form-input"
                 style={{ paddingRight: '3rem' }}
                 required
-                placeholder="Enter password"
+                placeholder={t('donor_auth.password_placeholder', 'Enter password')}
               />
               <button
                 type="button"
@@ -105,7 +107,7 @@ export default function DonorLoginPage() {
                   padding: '0.25rem'
                 }}
               >
-                {showPassword ? 'Hide' : 'Show'}
+                {showPassword ? t('donor_auth.hide', 'Hide') : t('donor_auth.show', 'Show')}
               </button>
             </div>
           </div>
@@ -120,7 +122,7 @@ export default function DonorLoginPage() {
                 textDecoration: 'none' 
               }}
             >
-              Forgot Password?
+              {t('donor_auth.forgot_password', 'Forgot Password?')}
             </Link>
           </div>
 
@@ -129,16 +131,39 @@ export default function DonorLoginPage() {
             className="form-submit-btn"
             disabled={loading}
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? t('donor_auth.logging_in', 'Logging in...') : t('donor_auth.login_btn', 'Login')}
           </button>
         </form>
 
         <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-          Don't have an account?{' '}
+          {t('donor_auth.no_account', "Don't have an account?")}{' '}
           <Link href="/donor/register" style={{ color: 'var(--primary-teal)', fontWeight: 'bold', textDecoration: 'none' }}>
-            Register here
+            {t('donor_auth.register_here', 'Register here')}
           </Link>
         </p>
+
+        {/* Admin Portal Button */}
+        <div style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-light)', textAlign: 'center' }}>
+          <Link
+            href="/admin/login"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              backgroundColor: 'var(--primary-navy)',
+              color: '#ffffff',
+              padding: '0.65rem 1.4rem',
+              borderRadius: '50px',
+              fontSize: '0.88rem',
+              fontWeight: '700',
+              textDecoration: 'none',
+              boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <span>🔐</span> {t('donor_auth.admin_portal_btn', 'Admin Portal Login')}
+          </Link>
+        </div>
       </div>
     </div>
   );

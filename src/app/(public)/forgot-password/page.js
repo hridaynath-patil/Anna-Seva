@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ForgotPasswordPage() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -39,7 +41,7 @@ export default function ForgotPasswordPage() {
   return (
     <div className="public-container animate-fade-in">
       <div className="form-card">
-        <h1 className="form-title">Forgot Password</h1>
+        <h1 className="form-title">{t('password_reset.forgot_title', 'Forgot Password')}</h1>
         
         <p style={{ 
           textAlign: 'center', 
@@ -47,7 +49,7 @@ export default function ForgotPasswordPage() {
           marginBottom: '2rem',
           fontSize: '0.95rem'
         }}>
-          Enter your registered email address. We will generate a secure password reset link for your account.
+          {t('password_reset.forgot_desc', 'Enter your registered email address. We will generate a secure password reset link for your account.')}
         </p>
 
         {error && (
@@ -84,7 +86,7 @@ export default function ForgotPasswordPage() {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group" style={{ marginBottom: '2rem' }}>
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">{t('donor_auth.email_label', 'Email Address')}</label>
             <input
               type="email"
               id="email"
@@ -92,7 +94,7 @@ export default function ForgotPasswordPage() {
               onChange={(e) => setEmail(e.target.value)}
               className="form-input"
               required
-              placeholder="e.g. hriday@donor.com"
+              placeholder={t('password_reset.email_placeholder', 'e.g. hriday@donor.com')}
               disabled={loading}
             />
           </div>
@@ -102,14 +104,14 @@ export default function ForgotPasswordPage() {
             className="form-submit-btn"
             disabled={loading}
           >
-            {loading ? 'Requesting Reset...' : 'Send Reset Link'}
+            {loading ? t('password_reset.requesting', 'Requesting Reset...') : t('password_reset.send_link_btn', 'Send Reset Link')}
           </button>
         </form>
 
         <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-          Remember your password?{' '}
+          {t('password_reset.remember_password', 'Remember your password?')}{' '}
           <Link href="/donor/login" style={{ color: 'var(--primary-teal)', fontWeight: 'bold', textDecoration: 'none' }}>
-            Back to Login
+            {t('password_reset.back_to_login', 'Back to Login')}
           </Link>
         </p>
       </div>

@@ -173,6 +173,45 @@ h6 {
   border-radius: 50px;
 }
 
+/* English language specific ~25% scaled down compact Navigation Bar */
+.public-header-en .public-nav {
+  padding: 0.65rem 1.5rem;
+}
+
+.public-header-en .public-logo {
+  font-size: 1.5rem;
+  gap: 0.45rem;
+}
+
+.public-header-en .public-logo img {
+  width: 31px !important;
+  height: 31px !important;
+}
+
+.public-header-en .public-logo-devanagari {
+  font-size: 1.8rem;
+}
+
+.public-header-en .public-menu {
+  gap: 1.1rem;
+}
+
+.public-header-en .public-menu a {
+  font-size: 0.9rem;
+  padding: 0.35rem 0.15rem;
+}
+
+.public-header-en .language-selector-btn {
+  padding: 0.3rem 0.7rem !important;
+  font-size: 0.9rem !important;
+}
+
+.public-header-en .dashboard-badge-link {
+  padding: 0.3rem 0.75rem !important;
+  font-size: 0.9rem !important;
+}
+
+
 /* Premium NGO Banner */
 .public-banner {
   width: 100%;
@@ -1580,7 +1619,8 @@ h6 {
 .news-card-image-box {
   position: relative;
   width: 100%;
-  padding-top: 130%; /* Tall newspaper clip ratio */
+  padding-top: 130%;
+  /* Tall newspaper clip ratio */
   background-color: #f1f5f9;
   overflow: hidden;
   cursor: pointer;
@@ -1594,7 +1634,8 @@ h6 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center; /* Start display from the top of clipping */
+  object-position: top center;
+  /* Start display from the top of clipping */
   transition: transform 0.5s ease;
 }
 
@@ -1796,6 +1837,7 @@ h6 {
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -1805,7 +1847,8 @@ h6 {
 .lightbox-image-wrapper {
   width: 100%;
   max-height: 80vh;
-  overflow-y: auto; /* Allow reading long newspaper columns */
+  overflow-y: auto;
+  /* Allow reading long newspaper columns */
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -1850,9 +1893,11 @@ h6 {
   :root {
     --visible-cards: 2;
   }
+
   .carousel-outer {
     padding: 0 3rem;
   }
+
   .news-carousel-section {
     padding: 5rem 0;
   }
@@ -1862,17 +1907,20 @@ h6 {
   :root {
     --visible-cards: 1;
   }
+
   .carousel-outer {
     padding: 0;
   }
+
   .carousel-nav-btn {
     display: none !important;
   }
+
   .news-carousel-section {
     padding: 4rem 1.25rem;
   }
+
   .news-section-title {
     font-size: 2rem;
   }
 }
-

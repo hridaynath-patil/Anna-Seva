@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 const newsItems = [
   {
@@ -54,6 +55,7 @@ const newsItems = [
 ];
 
 export default function NewsCarousel() {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
   const [isPaused, setIsPaused] = useState(false);
@@ -124,10 +126,10 @@ export default function NewsCarousel() {
 
         {/* Section Header */}
         <div className="news-header">
-          <span className="news-section-tag">MEDIA SPOTLIGHT & COVERAGE</span>
-          <h2 className="news-section-title">अन्न सेवा वृत्तपत्र प्रसिद्धी</h2>
+          <span className="news-section-tag">{t('media.tag', 'MEDIA SPOTLIGHT & COVERAGE')}</span>
+          <h2 className="news-section-title">{t('media.title', 'अन्न सेवा वृत्तपत्र प्रसिद्धी')}</h2>
           <p className="news-section-subtitle">
-            See what leading newspapers say about our efforts to reduce food waste and coordinate deliveries to feed the needy across Latur and Marathwada.
+            {t('media.desc', 'See what leading newspapers say about our efforts to reduce food waste and coordinate deliveries to feed the needy across Latur and Marathwada.')}
           </p>
         </div>
 
@@ -175,7 +177,7 @@ export default function NewsCarousel() {
                       className="news-card-image"
                     />
                     <div className="news-card-image-overlay">
-                      <span className="zoom-badge">🔍 Click to Zoom / Read</span>
+                      <span className="zoom-badge">{t('media.zoom_badge', '🔍 Click to Zoom / Read')}</span>
                     </div>
                   </div>
 
@@ -192,7 +194,7 @@ export default function NewsCarousel() {
                       onClick={() => setLightboxImage(item.image)}
                       className="news-card-btn"
                     >
-                      📰 View Full Newspaper Clip
+                      {t('media.view_clip_btn', '📰 View Full Newspaper Clip')}
                     </button>
                   </div>
                 </div>

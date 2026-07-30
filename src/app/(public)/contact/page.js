@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ContactPage() {
+  const { t, language } = useLanguage();
   const [pageText, setPageText] = useState('');
   const [formData, setFormData] = useState({
     name: '',
@@ -57,38 +59,42 @@ export default function ContactPage() {
     }
   };
 
+  const contactDescription = language !== 'en'
+    ? t('contact.desc_default')
+    : (pageText || t('contact.desc_default'));
+
   return (
     <div className="public-container animate-fade-in responsive-grid-contact">
 
       {/* Contact Info Panel */}
       <div className="contact-info-panel">
         <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', color: 'var(--text-dark)', marginBottom: '1rem', fontFamily: 'var(--font-title)' }}>
-          Contact Us
+          {t('contact.title', 'Contact Us')}
         </h1>
         <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: '1.7', whiteSpace: 'pre-line', marginBottom: '2rem' }}>
-          {pageText || 'Feel free to contact us with any questions, partnership proposals, or logistics issues. Fill out the form or write to us directly.'}
+          {contactDescription}
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <span style={{ fontSize: '1.5rem', backgroundColor: 'var(--primary-teal-light)', padding: '0.5rem', borderRadius: '8px', color: 'var(--primary-teal-dark)' }}>✉</span>
             <div>
-              <div style={{ fontWeight: 600 }}>Email Address</div>
-              <div style={{ color: 'var(--text-muted)', wordBreak: 'break-word' }}>vspatil.charitabletrust@gmail.com</div>
+              <div style={{ fontWeight: 600 }}>{t('contact.email_title', 'Email Address')}</div>
+              <div style={{ color: 'var(--text-muted)', wordBreak: 'break-word' }}>{t('contact.email_val', 'vspatil.charitabletrust@gmail.com')}</div>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <span style={{ fontSize: '1.5rem', backgroundColor: 'var(--primary-teal-light)', padding: '0.5rem', borderRadius: '8px', color: 'var(--primary-teal-dark)' }}>📞</span>
             <div>
-              <div style={{ fontWeight: 600 }}>Helpline Number</div>
-              <div style={{ color: 'var(--text-muted)', wordBreak: 'break-word' }}>+91 1800-111-222</div>
+              <div style={{ fontWeight: 600 }}>{t('contact.helpline_title', 'Helpline Number')}</div>
+              <div style={{ color: 'var(--text-muted)', wordBreak: 'break-word' }}>{t('contact.helpline_val', '+91 1800-111-222')}</div>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <span style={{ fontSize: '1.5rem', backgroundColor: 'var(--primary-teal-light)', padding: '0.5rem', borderRadius: '8px', color: 'var(--primary-teal-dark)' }}>📍</span>
             <div>
-              <div style={{ fontWeight: 600 }}>Central Office</div>
-              <div style={{ color: 'var(--text-muted)', wordBreak: 'break-word' }}>Matoshree Empire, Latur, Maharashtra, India</div>
+              <div style={{ fontWeight: 600 }}>{t('contact.office_title', 'Central Office')}</div>
+              <div style={{ color: 'var(--text-muted)', wordBreak: 'break-word' }}>{t('contact.office_val', 'Matoshree Empire, Latur, Maharashtra, India')}</div>
             </div>
           </div>
         </div>
@@ -96,7 +102,9 @@ export default function ContactPage() {
 
       {/* Enquiry Form */}
       <div className="form-card" style={{ width: '100%', margin: '0' }}>
-        <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', marginBottom: '1.5rem', color: 'var(--text-dark)' }}>Send Message</h2>
+        <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', marginBottom: '1.5rem', color: 'var(--text-dark)' }}>
+          {t('contact.form_title', 'Send Message')}
+        </h2>
 
         {status.message && (
           <div style={{
@@ -114,7 +122,7 @@ export default function ContactPage() {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Full Name</label>
+            <label htmlFor="name">{t('contact.name_label', 'Full Name')}</label>
             <input
               type="text"
               id="name"
@@ -123,12 +131,12 @@ export default function ContactPage() {
               onChange={handleChange}
               className="form-input"
               required
-              placeholder="Enter your name"
+              placeholder={t('contact.name_placeholder', 'Enter your name')}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">{t('contact.email_label', 'Email Address')}</label>
             <input
               type="email"
               id="email"
@@ -137,12 +145,12 @@ export default function ContactPage() {
               onChange={handleChange}
               className="form-input"
               required
-              placeholder="Enter your email"
+              placeholder={t('contact.email_placeholder', 'Enter your email')}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="mobile">Mobile Number</label>
+            <label htmlFor="mobile">{t('contact.mobile_label', 'Mobile Number')}</label>
             <input
               type="tel"
               id="mobile"
@@ -151,13 +159,13 @@ export default function ContactPage() {
               onChange={handleChange}
               className="form-input"
               required
-              placeholder="Enter 10-digit mobile"
+              placeholder={t('contact.mobile_placeholder', 'Enter 10-digit mobile')}
               pattern="[0-9]{10}"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="message">Your Message</label>
+            <label htmlFor="message">{t('contact.message_label', 'Your Message')}</label>
             <textarea
               id="message"
               name="message"
@@ -166,7 +174,7 @@ export default function ContactPage() {
               className="form-textarea"
               required
               rows="4"
-              placeholder="Write your enquiry message here..."
+              placeholder={t('contact.message_placeholder', 'Write your enquiry message here...')}
             ></textarea>
           </div>
 
@@ -175,7 +183,7 @@ export default function ContactPage() {
             className="form-submit-btn"
             disabled={submitting}
           >
-            {submitting ? 'Sending...' : 'Submit Enquiry'}
+            {submitting ? t('contact.submitting', 'Sending...') : t('contact.submit_btn', 'Submit Enquiry')}
           </button>
         </form>
       </div>
